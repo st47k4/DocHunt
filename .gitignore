@@ -31,3 +31,6 @@ yarn-error.log
 # Platform specific
 .DS_Store
 /.claude
+
+# Claude Code context (local only)
+CLAUDE.md
