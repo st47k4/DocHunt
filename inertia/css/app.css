@@ -45,10 +45,6 @@
     --gray-12: oklch(14.5% 0 0);
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
   html,
   body {
     height: 100%;

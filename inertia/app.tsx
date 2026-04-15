@@ -4,9 +4,14 @@ import { client } from './client'
 import Layout from '~/layouts/default'
 import { Data } from '@generated/data'
 import { createRoot } from 'react-dom/client'
-import { createInertiaApp } from '@inertiajs/react'
+import { createInertiaApp, router } from '@inertiajs/react'
 import { TuyauProvider } from '@adonisjs/inertia/react'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
+
+router.on('navigate', () => {
+  document.documentElement.scrollTop = 0
+  document.body.scrollTop = 0
+})
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
 
