@@ -1,0 +1,4 @@
+MAX_FILE_SIZE = 20 * 1024 * 1024  # 20 Mo
+ANALYSIS_TIMEOUT = 10             # secondes
+PDF_MAGIC = b"%PDF"
+ALLOWED_EXTENSIONS = {".pdf"}

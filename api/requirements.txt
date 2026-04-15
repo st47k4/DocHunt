@@ -24,3 +24,11 @@ uvicorn==0.44.0
 watchfiles==1.1.1
 websockets==16.0
 wrapt==2.1.2
+
+# OCR — extraction texte depuis PDFs scannés (traitement non implémenté, dépendances prêtes)
+pdf2image==1.17.0
+pytesseract==0.3.13
+pdfplumber==0.11.4
+
+# NER — reconnaissance d'entités nommées (personnes, lieux, organisations)
+spacy>=3.7
