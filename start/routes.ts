@@ -16,11 +16,17 @@ const HomeController = () => import('#controllers/home_controller')
 // Root → redirect to browser preferred language
 router.get('/', [HomeController, 'root']).as('home')
 
+const LOCALE_REGEX = /^(en|fr|es|de|pt|ar|zh|ja|hi)$/
+
 // Locale routes: /en  /fr  /es  /de  /pt
+router.get('/:locale', [HomeController, 'index']).where('locale', LOCALE_REGEX).as('home.locale')
+
+// Sub-pages
 router
-  .get('/:locale', [HomeController, 'index'])
-  .where('locale', /^(en|fr|es|de|pt)$/)
-  .as('home.locale')
+  .get('/:locale/demo', [HomeController, 'demo'])
+  .where('locale', LOCALE_REGEX)
+  .as('demo.locale')
+router.get('/:locale/faq', [HomeController, 'faq']).where('locale', LOCALE_REGEX).as('faq.locale')
 
 router
   .group(() => {

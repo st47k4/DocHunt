@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
-const LOCALES = ['en', 'fr', 'es', 'de', 'pt'] as const
+const LOCALES = ['en', 'fr', 'es', 'de', 'pt', 'ar', 'zh', 'ja', 'hi'] as const
 type Locale = (typeof LOCALES)[number]
 
 export default class HomeController {
@@ -18,5 +18,17 @@ export default class HomeController {
   async index({ inertia, params }: HttpContext) {
     const locale = params.locale as Locale
     return inertia.render('home', { locale })
+  }
+
+  /** GET /:locale/demo */
+  async demo({ inertia, params }: HttpContext) {
+    const locale = params.locale as Locale
+    return inertia.render('demo', { locale })
+  }
+
+  /** GET /:locale/faq */
+  async faq({ inertia, params }: HttpContext) {
+    const locale = params.locale as Locale
+    return inertia.render('faq', { locale })
   }
 }
