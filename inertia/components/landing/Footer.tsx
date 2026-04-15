@@ -1,13 +1,26 @@
 import { ScanSearch } from 'lucide-react'
-import { useT } from '~/i18n/context'
+import { useT, useLocale } from '~/i18n/context'
 
 export default function Footer() {
   const t = useT()
+  const locale = useLocale()
 
   const columns = [
-    { title: t.footer.columns.product.title, links: t.footer.columns.product.links, hrefs: ['#features', '#demo', '#formats', '#'] },
-    { title: t.footer.columns.resources.title, links: t.footer.columns.resources.links, hrefs: ['#', '#', '#'] },
-    { title: t.footer.columns.legal.title, links: t.footer.columns.legal.links, hrefs: ['#', '#', '#'] },
+    {
+      title: t.footer.columns.product.title,
+      links: t.footer.columns.product.links,
+      hrefs: [`/${locale}#features`, `/${locale}/demo`, `/${locale}#formats`, '#'],
+    },
+    {
+      title: t.footer.columns.resources.title,
+      links: t.footer.columns.resources.links,
+      hrefs: ['#', '#', '#'],
+    },
+    {
+      title: t.footer.columns.legal.title,
+      links: t.footer.columns.legal.links,
+      hrefs: ['#', '#', '#'],
+    },
   ]
 
   return (

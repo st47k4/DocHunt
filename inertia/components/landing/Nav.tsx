@@ -1,16 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { ScanSearch, ChevronDown } from 'lucide-react'
-import { router } from '@inertiajs/react'
-import { useT, useLocale } from '~/i18n/context'
+import { router, usePage } from '@inertiajs/react'
+import { useLocale } from '~/i18n/context'
 import { LOCALES, LOCALE_LABELS } from '~/i18n/types'
-
-function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-}
+import { useT } from '~/i18n/context'
 
 export default function Nav() {
   const t = useT()
   const locale = useLocale()
+  const { component } = usePage()
   const [scrolled, setScrolled] = useState(false)
   const [langOpen, setLangOpen] = useState(false)
   const langRef = useRef<HTMLDivElement>(null)
@@ -21,7 +19,6 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       if (langRef.current && !langRef.current.contains(e.target as Node)) {
@@ -32,11 +29,16 @@ export default function Nav() {
     return () => document.removeEventListener('mousedown', onClick)
   }, [])
 
+  function switchLocale(l: string) {
+    setLangOpen(false)
+    const pathMap: Record<string, string> = { home: '', demo: '/demo', faq: '/faq' }
+    const suffix = pathMap[component] ?? ''
+    router.visit(`/${l}${suffix}`)
+  }
+
   const links = [
-    { label: t.nav.features, target: 'features' },
-    { label: t.nav.howItWorks, target: 'how' },
-    { label: t.nav.demo, target: 'demo' },
-    { label: t.nav.faq, target: 'faq' },
+    { label: t.nav.demo, path: `/${locale}/demo`, page: 'demo' },
+    { label: t.nav.faq, path: `/${locale}/faq`, page: 'faq' },
   ]
 
   return (
@@ -47,20 +49,24 @@ export default function Nav() {
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5 font-mono font-bold text-xl text-cream">
+        <button
+          onClick={() => router.visit(`/${locale}`)}
+          className="flex items-center gap-2.5 font-mono font-bold text-xl text-cream cursor-pointer"
+        >
           <div className="w-9 h-9 rounded-[10px] bg-gradient-to-br from-amber-brand to-amber-dim flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.3)]">
             <ScanSearch className="w-[18px] h-[18px] text-bg-dark" />
           </div>
           DocHunt
-        </a>
+        </button>
 
         <div className="hidden md:flex items-center gap-8">
-          {/* Nav links */}
           {links.map((link) => (
             <button
-              key={link.target}
-              onClick={() => scrollTo(link.target)}
-              className="text-sm font-medium text-dim hover:text-cream transition-colors cursor-pointer"
+              key={link.page}
+              onClick={() => router.visit(link.path)}
+              className={`text-sm font-medium transition-colors cursor-pointer ${
+                component === link.page ? 'text-cream' : 'text-dim hover:text-cream'
+              }`}
             >
               {link.label}
             </button>
@@ -81,10 +87,7 @@ export default function Nav() {
                 {LOCALES.map((l) => (
                   <button
                     key={l}
-                    onClick={() => {
-                      setLangOpen(false)
-                      router.visit(`/${l}`)
-                    }}
+                    onClick={() => switchLocale(l)}
                     className={`w-full text-left px-4 py-2.5 text-sm transition-colors flex items-center gap-2.5 cursor-pointer ${
                       l === locale
                         ? 'text-amber-brand bg-[rgba(245,158,11,0.08)]'
@@ -101,7 +104,7 @@ export default function Nav() {
 
           {/* CTA */}
           <button
-            onClick={() => scrollTo('demo')}
+            onClick={() => router.visit(`/${locale}/demo`)}
             className="px-5 py-2 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full text-sm font-semibold transition-all hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] hover:-translate-y-px cursor-pointer"
           >
             {t.nav.analyze}

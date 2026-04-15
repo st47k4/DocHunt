@@ -17,10 +17,10 @@ createInertiaApp({
       `./pages/${name}.tsx`,
       import.meta.glob('./pages/**/*.tsx'),
       (page: ReactElement<Data.SharedProps>) => {
-      const Component = page.type as any
-      if (typeof Component.layout === 'function') return Component.layout(page)
-      return <Layout children={page} />
-    }
+        const Component = page.type as any
+        if (typeof Component.layout === 'function') return Component.layout(page)
+        return <Layout children={page} />
+      }
     )
   },
   setup({ el, App, props }) {
