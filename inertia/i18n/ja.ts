@@ -4,9 +4,11 @@ const ja: Translations = {
   nav: {
     features: '機能',
     howItWorks: '仕組み',
-    demo: 'デモ',
     faq: 'よくある質問',
     analyze: 'ファイルを分析',
+    community: 'コミュニティ',
+    issues: 'Issues',
+    pullRequests: 'Pull Requests',
   },
   hero: {
     badge: 'オープンベータ — 無料で始める',
@@ -87,6 +89,30 @@ const ja: Translations = {
       legal: { title: '法的情報', links: ['プライバシー', '利用規約', 'お問い合わせ'] },
     },
     builtWith: 'AdonisJS、TypeScript、Inertia.jsで構築',
+  },
+  communityPage: {
+    badge: 'オープンソース',
+    title: '共に',
+    highlight: '作る。',
+    subtitle: 'DocHuntはオープンソースプロジェクトです。コミュニティに参加しましょう：バグ報告、機能提案、コード貢献。',
+    ctaGithub: 'GitHubで見る',
+    ctaIssue: 'バグを報告',
+    howTitle: '貢献するには？',
+    howSubtitle: 'プロジェクトに参加する3つの方法。',
+    cards: [
+      { title: 'バグを報告', description: '問題を見つけましたか？できるだけ詳細を記載してGitHub issueを開いてください。', cta: 'Issueを開く' },
+      { title: '機能を提案', description: '何か足りないものがありますか？issueで説明してコミュニティで議論しましょう。', cta: '提案する' },
+      { title: 'コードを提出', description: 'リポジトリをフォークしてブランチを作成し、Pull Requestを開いてください。あらゆる貢献を歓迎します。', cta: '開いているPRを見る' },
+    ],
+    stackTitle: '技術スタック',
+    stackSubtitle: 'DocHuntを動かす技術。',
+    openTitle: 'なぜオープンソース？',
+    openSubtitle: '透明性、信頼、コラボレーション。',
+    openItems: [
+      { title: '完全な透明性', description: 'すべてのコードを確認し、ファイルが保存されないことを自分で検証できます。' },
+      { title: '継続的な改善', description: '外部からの貢献により検出精度が向上し、新しいファイル形式のサポートが追加されます。' },
+      { title: '活発なコミュニティ', description: 'Issues、議論、PR — プロジェクトはユーザーのフィードバックで進化します。' },
+    ],
   },
   backToTop: 'トップへ戻る',
 }

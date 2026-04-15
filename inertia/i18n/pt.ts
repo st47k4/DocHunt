@@ -4,9 +4,11 @@ const pt: Translations = {
   nav: {
     features: 'Funcionalidades',
     howItWorks: 'Como funciona',
-    demo: 'Demo',
     faq: 'FAQ',
     analyze: 'Analisar um arquivo',
+    community: 'Comunidade',
+    issues: 'Issues',
+    pullRequests: 'Pull Requests',
   },
   hero: {
     badge: 'Beta aberta — Comece gratuitamente',
@@ -160,6 +162,30 @@ const pt: Translations = {
       legal: { title: 'Legal', links: ['Privacidade', 'Termos', 'Contato'] },
     },
     builtWith: 'Construído com AdonisJS, TypeScript & Inertia.js',
+  },
+  communityPage: {
+    badge: 'Open Source',
+    title: 'Construído',
+    highlight: 'juntos.',
+    subtitle: 'DocHunt é um projeto open source. Junte-se à comunidade: reporte bugs, sugira funcionalidades, contribua com código.',
+    ctaGithub: 'Ver no GitHub',
+    ctaIssue: 'Reportar um bug',
+    howTitle: 'Como contribuir?',
+    howSubtitle: 'Três formas simples de participar do projeto.',
+    cards: [
+      { title: 'Reportar um bug', description: 'Encontrou um problema? Abra uma issue no GitHub com o máximo de detalhes possível.', cta: 'Abrir uma issue' },
+      { title: 'Sugerir uma ideia', description: 'Algo está faltando? Descreva em uma issue e a comunidade irá discutir.', cta: 'Fazer uma sugestão' },
+      { title: 'Enviar código', description: 'Faça um fork, crie uma branch e abra um Pull Request. Todas as contribuições são bem-vindas.', cta: 'Ver PRs abertas' },
+    ],
+    stackTitle: 'Stack técnico',
+    stackSubtitle: 'As tecnologias que fazem o DocHunt funcionar.',
+    openTitle: 'Por que open source?',
+    openSubtitle: 'Transparência, confiança e colaboração.',
+    openItems: [
+      { title: 'Transparência total', description: 'Audite cada linha de código e verifique que seus arquivos nunca são armazenados.' },
+      { title: 'Melhoria contínua', description: 'Contribuições externas melhoram a detecção e adicionam novos formatos de arquivo.' },
+      { title: 'Comunidade ativa', description: 'Issues, discussões, PRs — o projeto evolui com o feedback dos usuários.' },
+    ],
   },
   backToTop: 'Voltar ao topo',
 }

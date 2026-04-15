@@ -4,9 +4,11 @@ const zh: Translations = {
   nav: {
     features: '功能',
     howItWorks: '工作原理',
-    demo: '演示',
     faq: '常见问题',
     analyze: '分析文件',
+    community: '社区',
+    issues: 'Issues',
+    pullRequests: 'Pull Requests',
   },
   hero: {
     badge: '公开测试版 — 免费开始',
@@ -92,6 +94,30 @@ const zh: Translations = {
       legal: { title: '法律', links: ['隐私', '条款', '联系我们'] },
     },
     builtWith: '基于AdonisJS、TypeScript和Inertia.js构建',
+  },
+  communityPage: {
+    badge: '开源',
+    title: '共同',
+    highlight: '构建。',
+    subtitle: 'DocHunt 是一个开源项目。加入社区：报告错误、建议功能、贡献代码。',
+    ctaGithub: '在 GitHub 上查看',
+    ctaIssue: '报告错误',
+    howTitle: '如何贡献？',
+    howSubtitle: '三种简单的参与方式。',
+    cards: [
+      { title: '报告错误', description: '发现问题了吗？在 GitHub 上提交 issue，并提供尽可能多的细节。', cta: '提交 issue' },
+      { title: '建议功能', description: '有什么缺失的功能吗？在 issue 中描述它，社区会讨论。', cta: '提出建议' },
+      { title: '提交代码', description: 'Fork 仓库，创建分支并提交 Pull Request。欢迎所有贡献。', cta: '查看开放的 PR' },
+    ],
+    stackTitle: '技术栈',
+    stackSubtitle: '驱动 DocHunt 的技术。',
+    openTitle: '为什么开源？',
+    openSubtitle: '透明、信任与协作。',
+    openItems: [
+      { title: '完全透明', description: '审查每一行代码，亲自验证您的文件从不被存储。' },
+      { title: '持续改进', description: '外部贡献提升检测精度并支持更多文件格式。' },
+      { title: '活跃社区', description: 'Issues、讨论、PR — 项目通过用户反馈不断进化。' },
+    ],
   },
   backToTop: '返回顶部',
 }

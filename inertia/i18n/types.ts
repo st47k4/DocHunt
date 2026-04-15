@@ -17,9 +17,11 @@ export interface Translations {
   nav: {
     features: string
     howItWorks: string
-    demo: string
     faq: string
     analyze: string
+    community: string
+    issues: string
+    pullRequests: string
   }
   hero: {
     badge: string
@@ -75,6 +77,22 @@ export interface Translations {
     items: Array<{ question: string; answer: string }>
   }
   cta: { title: string; highlight: string; subtitle: string; button: string }
+  communityPage: {
+    badge: string
+    title: string
+    highlight: string
+    subtitle: string
+    ctaGithub: string
+    ctaIssue: string
+    howTitle: string
+    howSubtitle: string
+    cards: Array<{ title: string; description: string; cta: string }>
+    stackTitle: string
+    stackSubtitle: string
+    openTitle: string
+    openSubtitle: string
+    openItems: Array<{ title: string; description: string }>
+  }
   backToTop: string
   footer: {
     description: string

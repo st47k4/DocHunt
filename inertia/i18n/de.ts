@@ -4,9 +4,11 @@ const de: Translations = {
   nav: {
     features: 'Funktionen',
     howItWorks: 'So funktioniert es',
-    demo: 'Demo',
     faq: 'FAQ',
     analyze: 'Datei analysieren',
+    community: 'Community',
+    issues: 'Issues',
+    pullRequests: 'Pull Requests',
   },
   hero: {
     badge: 'Offene Beta — Kostenlos starten',
@@ -162,6 +164,30 @@ const de: Translations = {
       legal: { title: 'Rechtliches', links: ['Datenschutz', 'AGB', 'Kontakt'] },
     },
     builtWith: 'Gebaut mit AdonisJS, TypeScript & Inertia.js',
+  },
+  communityPage: {
+    badge: 'Open Source',
+    title: 'Gemeinsam',
+    highlight: 'gebaut.',
+    subtitle: 'DocHunt ist ein Open-Source-Projekt. Werde Teil der Community: melde Bugs, schlage Funktionen vor, trage Code bei.',
+    ctaGithub: 'Auf GitHub ansehen',
+    ctaIssue: 'Bug melden',
+    howTitle: 'Wie beitragen?',
+    howSubtitle: 'Drei einfache Wege, um mitzumachen.',
+    cards: [
+      { title: 'Bug melden', description: 'Problem gefunden? Öffne ein GitHub Issue mit möglichst vielen Details.', cta: 'Issue öffnen' },
+      { title: 'Idee vorschlagen', description: 'Etwas fehlt? Beschreibe es in einem Issue und die Community diskutiert darüber.', cta: 'Vorschlag machen' },
+      { title: 'Code einreichen', description: 'Fork das Repo, erstelle einen Branch und öffne einen Pull Request. Alle Beiträge sind willkommen.', cta: 'Offene PRs ansehen' },
+    ],
+    stackTitle: 'Tech-Stack',
+    stackSubtitle: 'Die Technologien hinter DocHunt.',
+    openTitle: 'Warum Open Source?',
+    openSubtitle: 'Transparenz, Vertrauen und Zusammenarbeit.',
+    openItems: [
+      { title: 'Volle Transparenz', description: 'Prüfe jede Codezeile und verifiziere, dass deine Dateien niemals gespeichert werden.' },
+      { title: 'Kontinuierliche Verbesserung', description: 'Externe Beiträge verbessern die Erkennung und ermöglichen neue Dateiformate.' },
+      { title: 'Aktive Community', description: 'Issues, Diskussionen, PRs — das Projekt entwickelt sich durch Nutzerfeedback weiter.' },
+    ],
   },
   backToTop: 'Nach oben',
 }

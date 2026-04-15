@@ -31,14 +31,14 @@ export default function Nav() {
 
   function switchLocale(l: string) {
     setLangOpen(false)
-    const pathMap: Record<string, string> = { home: '', demo: '/demo', faq: '/faq' }
+    const pathMap: Record<string, string> = { home: '', demo: '/demo', faq: '/faq', community: '/community' }
     const suffix = pathMap[component] ?? ''
     router.visit(`/${l}${suffix}`)
   }
 
   const links = [
-    { label: t.nav.demo, path: `/${locale}/demo`, page: 'demo' },
     { label: t.nav.faq, path: `/${locale}/faq`, page: 'faq' },
+    { label: t.nav.community, path: `/${locale}/community`, page: 'community' },
   ]
 
   return (

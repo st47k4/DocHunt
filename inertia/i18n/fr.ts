@@ -4,9 +4,11 @@ const fr: Translations = {
   nav: {
     features: 'Fonctionnalités',
     howItWorks: 'Comment ça marche',
-    demo: 'Démo',
     faq: 'FAQ',
     analyze: 'Analyser un fichier',
+    community: 'Communauté',
+    issues: 'Issues',
+    pullRequests: 'Pull Requests',
   },
   hero: {
     badge: 'Bêta ouverte — Commencez gratuitement',
@@ -160,6 +162,30 @@ const fr: Translations = {
       legal: { title: 'Légal', links: ['Confidentialité', 'CGU', 'Contact'] },
     },
     builtWith: 'Construit avec AdonisJS, TypeScript & Inertia.js',
+  },
+  communityPage: {
+    badge: 'Open Source',
+    title: 'Construit',
+    highlight: 'ensemble.',
+    subtitle: 'DocHunt est un projet open source. Rejoins la communauté : signale des bugs, propose des fonctionnalités, contribue au code.',
+    ctaGithub: 'Voir sur GitHub',
+    ctaIssue: 'Signaler un bug',
+    howTitle: 'Comment contribuer ?',
+    howSubtitle: 'Trois façons simples de participer au projet.',
+    cards: [
+      { title: 'Signaler un bug', description: 'Tu as trouvé un problème ? Ouvre une issue GitHub avec le maximum de détails pour qu\'on puisse le corriger rapidement.', cta: 'Ouvrir une issue' },
+      { title: 'Proposer une idée', description: 'Une fonctionnalité manque ou pourrait être améliorée ? Décris-la dans une issue et la communauté en discutera.', cta: 'Faire une suggestion' },
+      { title: 'Soumettre du code', description: 'Fork le dépôt, crée une branche et ouvre une Pull Request. Toutes les contributions sont les bienvenues.', cta: 'Voir les PR ouvertes' },
+    ],
+    stackTitle: 'Stack technique',
+    stackSubtitle: 'Les technologies qui font tourner DocHunt.',
+    openTitle: 'Pourquoi open source ?',
+    openSubtitle: 'Transparence, confiance et collaboration.',
+    openItems: [
+      { title: 'Transparence totale', description: 'Audite chaque ligne de code et vérifie par toi-même que tes fichiers ne sont jamais stockés.' },
+      { title: 'Amélioration continue', description: 'Les contributions externes améliorent la détection et permettent d\'ajouter de nouveaux formats.' },
+      { title: 'Communauté active', description: 'Issues, discussions, PRs — le projet évolue grâce aux retours des utilisateurs.' },
+    ],
   },
   backToTop: 'Haut de page',
 }

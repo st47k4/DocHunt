@@ -4,9 +4,11 @@ const es: Translations = {
   nav: {
     features: 'Funcionalidades',
     howItWorks: 'Cómo funciona',
-    demo: 'Demo',
     faq: 'FAQ',
     analyze: 'Analizar un archivo',
+    community: 'Comunidad',
+    issues: 'Issues',
+    pullRequests: 'Pull Requests',
   },
   hero: {
     badge: 'Beta abierta — Empieza gratis',
@@ -161,6 +163,30 @@ const es: Translations = {
       legal: { title: 'Legal', links: ['Privacidad', 'Términos', 'Contacto'] },
     },
     builtWith: 'Construido con AdonisJS, TypeScript & Inertia.js',
+  },
+  communityPage: {
+    badge: 'Open Source',
+    title: 'Construido',
+    highlight: 'juntos.',
+    subtitle: 'DocHunt es un proyecto open source. Únete a la comunidad: reporta bugs, sugiere funcionalidades, contribuye con código.',
+    ctaGithub: 'Ver en GitHub',
+    ctaIssue: 'Reportar un bug',
+    howTitle: '¿Cómo contribuir?',
+    howSubtitle: 'Tres formas sencillas de participar en el proyecto.',
+    cards: [
+      { title: 'Reportar un bug', description: '¿Encontraste un problema? Abre una issue en GitHub con todos los detalles posibles.', cta: 'Abrir una issue' },
+      { title: 'Sugerir una idea', description: '¿Falta algo? Descríbelo en una issue y la comunidad lo discutirá.', cta: 'Hacer una sugerencia' },
+      { title: 'Enviar código', description: 'Haz un fork, crea una rama y abre un Pull Request. Todas las contribuciones son bienvenidas.', cta: 'Ver PRs abiertas' },
+    ],
+    stackTitle: 'Stack técnico',
+    stackSubtitle: 'Las tecnologías que hacen funcionar DocHunt.',
+    openTitle: '¿Por qué open source?',
+    openSubtitle: 'Transparencia, confianza y colaboración.',
+    openItems: [
+      { title: 'Transparencia total', description: 'Audita cada línea de código y verifica que tus archivos nunca se almacenan.' },
+      { title: 'Mejora continua', description: 'Las contribuciones externas mejoran la detección y añaden nuevos formatos.' },
+      { title: 'Comunidad activa', description: 'Issues, debates, PRs — el proyecto evoluciona gracias a los usuarios.' },
+    ],
   },
   backToTop: 'Volver arriba',
 }

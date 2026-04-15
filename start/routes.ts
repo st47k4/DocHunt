@@ -31,6 +31,10 @@ router
   .where('locale', LOCALE_REGEX)
   .as('demo.locale')
 router.get('/:locale/faq', [HomeController, 'faq']).where('locale', LOCALE_REGEX).as('faq.locale')
+router
+  .get('/:locale/community', [HomeController, 'community'])
+  .where('locale', LOCALE_REGEX)
+  .as('community.locale')
 
 router
   .group(() => {

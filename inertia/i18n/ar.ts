@@ -4,9 +4,11 @@ const ar: Translations = {
   nav: {
     features: 'الميزات',
     howItWorks: 'كيف يعمل',
-    demo: 'تجربة',
     faq: 'الأسئلة الشائعة',
     analyze: 'تحليل ملف',
+    community: 'المجتمع',
+    issues: 'Issues',
+    pullRequests: 'Pull Requests',
   },
   hero: {
     badge: 'نسخة تجريبية مفتوحة — ابدأ مجانًا',
@@ -140,6 +142,30 @@ const ar: Translations = {
       legal: { title: 'قانوني', links: ['الخصوصية', 'الشروط', 'اتصل بنا'] },
     },
     builtWith: 'مبني بـ AdonisJS وTypeScript وInertia.js',
+  },
+  communityPage: {
+    badge: 'مفتوح المصدر',
+    title: 'بُني',
+    highlight: 'معاً.',
+    subtitle: 'DocHunt مشروع مفتوح المصدر. انضم إلى المجتمع: أبلغ عن الأخطاء، اقترح ميزات، ساهم بالكود.',
+    ctaGithub: 'عرض على GitHub',
+    ctaIssue: 'الإبلاغ عن خطأ',
+    howTitle: 'كيف تساهم؟',
+    howSubtitle: 'ثلاث طرق بسيطة للمشاركة في المشروع.',
+    cards: [
+      { title: 'الإبلاغ عن خطأ', description: 'وجدت مشكلة؟ افتح issue على GitHub مع أكبر قدر من التفاصيل.', cta: 'فتح issue' },
+      { title: 'اقتراح فكرة', description: 'هناك شيء ناقص؟ صفه في issue وسيناقشه المجتمع.', cta: 'تقديم اقتراح' },
+      { title: 'إرسال كود', description: 'Fork المستودع، أنشئ فرعاً وافتح Pull Request. جميع المساهمات مرحب بها.', cta: 'عرض PRs المفتوحة' },
+    ],
+    stackTitle: 'المكدس التقني',
+    stackSubtitle: 'التقنيات التي تشغل DocHunt.',
+    openTitle: 'لماذا مفتوح المصدر؟',
+    openSubtitle: 'الشفافية والثقة والتعاون.',
+    openItems: [
+      { title: 'شفافية كاملة', description: 'راجع كل سطر كود وتحقق بنفسك أن ملفاتك لا تُخزَّن أبداً.' },
+      { title: 'تحسين مستمر', description: 'المساهمات الخارجية تحسن الكشف وتضيف صيغ ملفات جديدة.' },
+      { title: 'مجتمع نشط', description: 'Issues، نقاشات، PRs — المشروع يتطور بفضل ملاحظات المستخدمين.' },
+    ],
   },
   backToTop: 'العودة للأعلى',
 }

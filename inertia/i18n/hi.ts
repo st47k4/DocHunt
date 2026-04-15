@@ -4,9 +4,11 @@ const hi: Translations = {
   nav: {
     features: 'विशेषताएं',
     howItWorks: 'यह कैसे काम करता है',
-    demo: 'डेमो',
     faq: 'सामान्य प्रश्न',
     analyze: 'फ़ाइल विश्लेषण',
+    community: 'समुदाय',
+    issues: 'Issues',
+    pullRequests: 'Pull Requests',
   },
   hero: {
     badge: 'ओपन बीटा — मुफ़्त में शुरू करें',
@@ -156,6 +158,30 @@ const hi: Translations = {
       legal: { title: 'कानूनी', links: ['गोपनीयता', 'शर्तें', 'संपर्क'] },
     },
     builtWith: 'AdonisJS, TypeScript और Inertia.js के साथ बनाया गया',
+  },
+  communityPage: {
+    badge: 'ओपन सोर्स',
+    title: 'मिलकर',
+    highlight: 'बनाया।',
+    subtitle: 'DocHunt एक ओपन सोर्स प्रोजेक्ट है। समुदाय में शामिल हों: बग रिपोर्ट करें, सुविधाएं सुझाएं, कोड योगदान करें।',
+    ctaGithub: 'GitHub पर देखें',
+    ctaIssue: 'बग रिपोर्ट करें',
+    howTitle: 'कैसे योगदान करें?',
+    howSubtitle: 'प्रोजेक्ट में भाग लेने के तीन सरल तरीके।',
+    cards: [
+      { title: 'बग रिपोर्ट करें', description: 'कोई समस्या मिली? अधिकतम विवरण के साथ GitHub issue खोलें।', cta: 'Issue खोलें' },
+      { title: 'विचार सुझाएं', description: 'कुछ कमी है? issue में इसे बताएं और समुदाय चर्चा करेगा।', cta: 'सुझाव दें' },
+      { title: 'कोड सबमिट करें', description: 'रेपो को fork करें, branch बनाएं और Pull Request खोलें। सभी योगदान स्वागत योग्य हैं।', cta: 'खुले PR देखें' },
+    ],
+    stackTitle: 'टेक स्टैक',
+    stackSubtitle: 'DocHunt को चलाने वाली तकनीकें।',
+    openTitle: 'ओपन सोर्स क्यों?',
+    openSubtitle: 'पारदर्शिता, विश्वास और सहयोग।',
+    openItems: [
+      { title: 'पूर्ण पारदर्शिता', description: 'हर कोड लाइन की जांच करें और खुद सत्यापित करें कि आपकी फाइलें कभी संग्रहीत नहीं होतीं।' },
+      { title: 'निरंतर सुधार', description: 'बाहरी योगदान से डिटेक्शन बेहतर होता है और नए फाइल फॉर्मेट जुड़ते हैं।' },
+      { title: 'सक्रिय समुदाय', description: 'Issues, चर्चाएं, PRs — प्रोजेक्ट उपयोगकर्ताओं के फीडबैक से विकसित होता है।' },
+    ],
   },
   backToTop: 'शीर्ष पर वापस जाएं',
 }

@@ -4,9 +4,11 @@ const en: Translations = {
   nav: {
     features: 'Features',
     howItWorks: 'How it works',
-    demo: 'Demo',
     faq: 'FAQ',
     analyze: 'Analyze a file',
+    community: 'Community',
+    issues: 'Issues',
+    pullRequests: 'Pull Requests',
   },
   hero: {
     badge: 'Open Beta — Get started for free',
@@ -157,6 +159,30 @@ const en: Translations = {
       legal: { title: 'Legal', links: ['Privacy', 'Terms', 'Contact'] },
     },
     builtWith: 'Built with AdonisJS, TypeScript & Inertia.js',
+  },
+  communityPage: {
+    badge: 'Open Source',
+    title: 'Built',
+    highlight: 'together.',
+    subtitle: 'DocHunt is an open source project. Join the community: report bugs, suggest features, contribute code.',
+    ctaGithub: 'View on GitHub',
+    ctaIssue: 'Report a bug',
+    howTitle: 'How to contribute?',
+    howSubtitle: 'Three simple ways to get involved.',
+    cards: [
+      { title: 'Report a bug', description: 'Found an issue? Open a GitHub issue with as much detail as possible so we can fix it quickly.', cta: 'Open an issue' },
+      { title: 'Suggest a feature', description: 'Something missing or could be improved? Describe it in an issue and the community will discuss it.', cta: 'Make a suggestion' },
+      { title: 'Submit code', description: 'Fork the repo, create a branch and open a Pull Request. All contributions are welcome.', cta: 'View open PRs' },
+    ],
+    stackTitle: 'Tech stack',
+    stackSubtitle: 'The technologies powering DocHunt.',
+    openTitle: 'Why open source?',
+    openSubtitle: 'Transparency, trust and collaboration.',
+    openItems: [
+      { title: 'Full transparency', description: 'Audit every line of code and verify for yourself that your files are never stored.' },
+      { title: 'Continuous improvement', description: 'External contributions improve detection accuracy and add support for new file formats.' },
+      { title: 'Active community', description: 'Issues, discussions, PRs — the project evolves through user feedback.' },
+    ],
   },
   backToTop: 'Back to top',
 }
