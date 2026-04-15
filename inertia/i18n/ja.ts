@@ -46,8 +46,8 @@ const ja: Translations = {
     tag: '試してみる',
     title: '自分の目で確かめて。',
     subtitle: 'ファイルをアップロードして、露出している情報を即座に発見。',
-    upload: { title: 'ここにファイルをドロップ', subtitle: 'またはクリックして参照' },
-    result: { status: '分析済み', sensitiveCount: '4件の機密項目を検出', export: 'エクスポート', clean: 'クリーン' },
+    upload: { title: 'ここにファイルをドロップ', subtitle: 'またはクリックして参照', pdfOnly: 'PDFのみ · 最大20 MB', dragging: 'ここに放してください' },
+    result: { status: '分析済み', sensitiveCount: '4件の機密項目を検出', export: 'エクスポート', clean: 'クリーン', loading: '分析中…', errorTitle: '分析に失敗しました', riskScore: 'リスクスコア', newAnalysis: '新しい分析', textContent: 'テキスト内容', noText: 'テキスト未検出 — スキャンPDF（OCR近日公開）', textTruncated: '10,000文字に切り詰め' },
   },
   formats: {
     tag: '互換性',

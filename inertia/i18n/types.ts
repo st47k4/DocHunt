@@ -47,8 +47,20 @@ export interface Translations {
     tag: string
     title: string
     subtitle: string
-    upload: { title: string; subtitle: string }
-    result: { status: string; sensitiveCount: string; export: string; clean: string }
+    upload: { title: string; subtitle: string; pdfOnly: string; dragging: string }
+    result: {
+      status: string
+      sensitiveCount: string
+      export: string
+      clean: string
+      loading: string
+      errorTitle: string
+      riskScore: string
+      newAnalysis: string
+      textContent: string
+      noText: string
+      textTruncated: string
+    }
   }
   formats: {
     tag: string

@@ -45,8 +45,8 @@ const zh: Translations = {
     tag: '试用',
     title: '亲自体验。',
     subtitle: '上传文件，立即发现它所暴露的信息。',
-    upload: { title: '将文件拖到此处', subtitle: '或点击浏览' },
-    result: { status: '已分析', sensitiveCount: '检测到4个敏感项', export: '导出', clean: '清除' },
+    upload: { title: '将文件拖到此处', subtitle: '或点击浏览', pdfOnly: '仅限PDF · 最大20 MB', dragging: '释放以分析' },
+    result: { status: '已分析', sensitiveCount: '检测到4个敏感项', export: '导出', clean: '清除', loading: '分析中…', errorTitle: '分析失败', riskScore: '风险评分', newAnalysis: '新的分析', textContent: '文本内容', noText: '未检测到文本 — 扫描版PDF（OCR即将推出）', textTruncated: '截断至10,000字符' },
   },
   formats: {
     tag: '兼容性',
