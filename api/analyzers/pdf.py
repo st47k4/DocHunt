@@ -6,7 +6,7 @@ import pikepdf
 import pdfplumber
 
 from analyzers.base import BaseAnalyzer
-from models.result import AnalysisResult, MetadataField, SensitiveMatch
+from models.result import PdfAnalysisResult, MetadataField, SensitiveMatch
 
 if TYPE_CHECKING:
     from spacy.language import Language
@@ -176,7 +176,7 @@ def _score(fields: list[MetadataField], has_js: bool, has_embedded: bool, has_gp
 
 
 class PdfAnalyzer(BaseAnalyzer):
-    def analyze(self, data: bytes, filename: str) -> AnalysisResult:
+    def analyze(self, data: bytes, filename: str) -> PdfAnalysisResult:
         warnings: list[str] = []
         fields: list[MetadataField] = []
         embedded_urls: list[str] = []
@@ -261,7 +261,7 @@ class PdfAnalyzer(BaseAnalyzer):
         text = _extract_text(data)
         sensitive_matches = _extract_sensitive_data(text) if text else []
 
-        return AnalysisResult(
+        return PdfAnalysisResult(
             filename=filename,
             file_size=len(data),
             page_count=page_count,
