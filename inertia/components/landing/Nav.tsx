@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
-import { ScanSearch, ChevronDown, Menu, X } from 'lucide-react'
+import { ScanSearch, ChevronDown, Menu, X, Sun, Moon } from 'lucide-react'
 import { router, usePage } from '@inertiajs/react'
 import { useLocale } from '~/i18n/context'
 import { LOCALES, LOCALE_LABELS } from '~/i18n/types'
 import { useT } from '~/i18n/context'
+import { useTheme } from '~/context/theme'
 
 export default function Nav() {
   const t = useT()
   const locale = useLocale()
   const { component } = usePage()
+  const { theme, toggleTheme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [langOpen, setLangOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -16,6 +18,7 @@ export default function Nav() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -65,8 +68,10 @@ export default function Nav() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 border-b border-edge transition-all duration-300 ${
-          scrolled || menuOpen ? 'backdrop-blur-xl bg-bg-dark/80' : 'bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
+          scrolled || menuOpen
+            ? 'backdrop-blur-xl bg-bg-dark/90 border-edge shadow-[0_1px_24px_rgba(0,0,0,0.14)]'
+            : 'bg-transparent border-transparent'
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
@@ -127,6 +132,15 @@ export default function Nav() {
               )}
             </div>
 
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 flex items-center justify-center rounded-xl border border-edge hover:border-edge-hover bg-bg-card hover:bg-bg-card-hover text-dim hover:text-cream transition-all cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+
             {/* CTA */}
             <button
               onClick={() => navigate(`/${locale}/demo`)}
@@ -136,14 +150,23 @@ export default function Nav() {
             </button>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMenuOpen((v) => !v)}
-            className="md:hidden flex items-center justify-center w-9 h-9 text-dim hover:text-cream transition-colors cursor-pointer"
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Mobile: theme toggle + hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 flex items-center justify-center rounded-xl border border-edge bg-bg-card text-dim hover:text-cream transition-all cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              className="w-9 h-9 flex items-center justify-center text-dim hover:text-cream transition-colors cursor-pointer"
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </nav>
 

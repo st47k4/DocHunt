@@ -5,6 +5,7 @@ import { I18nProvider } from '~/i18n/context'
 import { getTranslations, type Locale } from '~/i18n'
 import Footer from '~/components/landing/Footer'
 import Nav from '~/components/landing/Nav'
+import { ThemeProvider } from '~/context/theme'
 
 export default function LandingLayout({ children }: { children: ReactNode }) {
   const { props } = usePage()
@@ -12,13 +13,15 @@ export default function LandingLayout({ children }: { children: ReactNode }) {
   const t = getTranslations(locale)
 
   return (
-    <I18nProvider t={t} locale={locale}>
-      <div className="noise-overlay dark-scroll min-h-screen bg-bg-dark text-cream font-sans antialiased">
-        <Nav />
-        {children}
-        <Footer />
-        <Toaster position="top-center" richColors />
-      </div>
-    </I18nProvider>
+    <ThemeProvider>
+      <I18nProvider t={t} locale={locale}>
+        <div className="noise-overlay dark-scroll min-h-screen bg-bg-dark text-cream font-sans antialiased overflow-x-hidden">
+          <Nav />
+          {children}
+          <Footer />
+          <Toaster position="top-center" richColors />
+        </div>
+      </I18nProvider>
+    </ThemeProvider>
   )
 }
