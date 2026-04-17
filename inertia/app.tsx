@@ -13,10 +13,8 @@ router.on('navigate', () => {
   document.body.scrollTop = 0
 })
 
-const appName = import.meta.env.VITE_APP_NAME || 'AdonisJS'
-
 createInertiaApp({
-  title: (title) => (title ? `${title} - ${appName}` : appName),
+  title: (title) => title || 'DocHunt',
   resolve: (name) => {
     return resolvePageComponent(
       `./pages/${name}.tsx`,
