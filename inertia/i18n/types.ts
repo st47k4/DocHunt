@@ -104,6 +104,14 @@ export interface Translations {
     lastUpdated: string
     sections: Array<{ title: string; content: string }>
   }
+  seo: {
+    home: { title: string; description: string }
+    demo: { title: string; description: string }
+    faq: { title: string; description: string }
+    community: { title: string; description: string }
+    privacy: { title: string; description: string }
+    terms: { title: string; description: string }
+  }
   backToTop: string
   footer: {
     description: string

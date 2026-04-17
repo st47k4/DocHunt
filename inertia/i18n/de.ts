@@ -314,6 +314,37 @@ const de: Translations = {
       },
     ],
   },
+  seo: {
+    home: {
+      title: 'DocHunt | Versteckte Daten in Ihren Dateien aufdecken',
+      description:
+        'Analysieren Sie PDFs und Bilder, um Metadaten, Autorenidentität, GPS-Standort und mehr zu extrahieren. Kostenlos, sofort, datenschutzfreundlich.',
+    },
+    demo: {
+      title: 'DocHunt | Eine Datei analysieren',
+      description:
+        'Laden Sie ein PDF oder Bild hoch und entdecken Sie sofort die preisgegebenen Metadaten. Ohne Anmeldung.',
+    },
+    faq: {
+      title: 'DocHunt | Häufig gestellte Fragen',
+      description:
+        'Alles, was Sie über DocHunt wissen müssen: Datenschutz, unterstützte Formate und wie die Analyse funktioniert.',
+    },
+    community: {
+      title: 'DocHunt | Community',
+      description:
+        'DocHunt ist Open Source. Melden Sie Fehler, schlagen Sie Funktionen vor und tragen Sie auf GitHub bei.',
+    },
+    privacy: {
+      title: 'DocHunt | Datenschutzrichtlinie',
+      description:
+        'Erfahren Sie, wie DocHunt mit Ihren Daten umgeht. Dateien werden niemals gespeichert und keine personenbezogenen Daten erhoben.',
+    },
+    terms: {
+      title: 'DocHunt | Nutzungsbedingungen',
+      description: 'Einfache und faire Regeln für die Nutzung von DocHunt.',
+    },
+  },
   backToTop: 'Nach oben',
 }
 

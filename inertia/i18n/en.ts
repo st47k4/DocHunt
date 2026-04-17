@@ -310,6 +310,37 @@ const en: Translations = {
       },
     ],
   },
+  seo: {
+    home: {
+      title: 'DocHunt | Reveal the Hidden Data in Your Files',
+      description:
+        'Scan PDFs and images to extract metadata, author identity, GPS location and more. Free, instant, privacy-friendly.',
+    },
+    demo: {
+      title: 'DocHunt | Analyze a File',
+      description:
+        'Upload a PDF or image and instantly discover what metadata it exposes. No sign-up required.',
+    },
+    faq: {
+      title: 'DocHunt | Frequently Asked Questions',
+      description:
+        'Everything you need to know about DocHunt: privacy, supported formats, and how the analysis works.',
+    },
+    community: {
+      title: 'DocHunt | Community',
+      description:
+        'DocHunt is open source. Report bugs, suggest features, and contribute code on GitHub.',
+    },
+    privacy: {
+      title: 'DocHunt | Privacy Policy',
+      description:
+        'Learn how DocHunt handles your data. Files are never stored and no personal data is collected.',
+    },
+    terms: {
+      title: 'DocHunt | Terms of Service',
+      description: 'Simple, fair rules for using DocHunt during the open beta.',
+    },
+  },
   backToTop: 'Back to top',
 }
 
