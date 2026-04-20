@@ -1,0 +1,39 @@
+name: Deploy DocHunt
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install & Build
+        run: |
+          npm ci
+          node ace build
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DOCHUNT_VPS_HOST }}
+          username: dochunt
+          key: ${{ secrets.DOCHUNT_VPS_SSH_KEY }}
+          port: 52200
+          script: |
+            cd /var/www/dochunt
+            git pull origin main
+            npm ci --omit=dev
+            node ace build
+            cp .env build/.env
+            ln -sfn /var/www/dochunt/tmp /var/www/dochunt/build/tmp
+            cd build && node ace migration:run && cd ..
+            docker compose up -d --build api
+            pm2 restart dochunt
