@@ -19,7 +19,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-7 py-3.5 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full font-semibold text-base shadow-[0_4px_30px_rgba(245,158,11,0.25)] hover:shadow-[0_8px_50px_rgba(245,158,11,0.4)] hover:-translate-y-0.5 transition-all"
+          className="inline-flex items-center gap-2 px-7 py-3.5 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full font-semibold text-base shadow-[0_4px_30px_rgba(34,197,94,0.25)] hover:shadow-[0_8px_50px_rgba(34,197,94,0.4)] hover:-translate-y-0.5 transition-all"
         >
           Back to home
         </Link>

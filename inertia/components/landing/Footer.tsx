@@ -29,7 +29,7 @@ export default function Footer() {
         <div className="flex flex-wrap justify-between gap-10">
           <div className="max-w-[280px]">
             <div className="flex items-center gap-2.5 font-mono font-bold text-lg mb-3">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-brand to-amber-dim flex items-center justify-center shadow-[0_0_16px_rgba(245,158,11,0.25)]">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-brand to-amber-dim flex items-center justify-center shadow-[0_0_16px_rgba(34,197,94,0.25)]">
                 <ScanSearch className="w-3.5 h-3.5 text-bg-dark" />
               </div>
               DocHunt

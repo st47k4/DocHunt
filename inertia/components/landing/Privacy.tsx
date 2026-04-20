@@ -20,7 +20,7 @@ export default function Privacy() {
             <p className="font-mono text-xs uppercase tracking-[3px] text-amber-brand mb-6">
               {p.badge}
             </p>
-            <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-brand mx-auto mb-8">
+            <div className="w-16 h-16 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-amber-brand mx-auto mb-8">
               <ShieldCheck className="w-8 h-8" />
             </div>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">{p.title}</h1>
@@ -45,7 +45,7 @@ export default function Privacy() {
               >
                 <div className="flex gap-5">
                   <div className="mt-0.5 flex-shrink-0">
-                    <div className="w-7 h-7 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                    <div className="w-7 h-7 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center">
                       <span className="text-amber-brand font-mono text-xs font-bold">
                         {String(i + 1).padStart(2, '0')}
                       </span>

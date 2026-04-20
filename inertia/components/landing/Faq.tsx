@@ -31,7 +31,7 @@ export default function Faq() {
               className="bg-bg-card border border-edge hover:border-edge-hover rounded-[14px] p-7 transition-colors"
             >
               <h4 className="text-[15px] font-semibold mb-2.5 flex items-start gap-2.5">
-                <span className="flex-shrink-0 w-6 h-6 bg-[rgba(245,158,11,0.12)] rounded-md flex items-center justify-center font-mono text-xs font-bold text-amber-brand mt-0.5">
+                <span className="flex-shrink-0 w-6 h-6 bg-[rgba(34,197,94,0.12)] rounded-md flex items-center justify-center font-mono text-xs font-bold text-amber-brand mt-0.5">
                   ?
                 </span>
                 {item.question}

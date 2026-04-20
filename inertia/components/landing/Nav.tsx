@@ -80,7 +80,7 @@ export default function Nav() {
             onClick={() => navigate(`/${locale}`)}
             className="flex items-center gap-2.5 font-mono font-bold text-xl text-cream cursor-pointer"
           >
-            <div className="w-9 h-9 rounded-[10px] bg-gradient-to-br from-amber-brand to-amber-dim flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+            <div className="w-9 h-9 rounded-[10px] bg-gradient-to-br from-amber-brand to-amber-dim flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.3)]">
               <ScanSearch className="w-[18px] h-[18px] text-bg-dark" />
             </div>
             DocHunt
@@ -120,7 +120,7 @@ export default function Nav() {
                       onClick={() => switchLocale(l)}
                       className={`w-full text-left px-4 py-2.5 text-sm transition-colors flex items-center gap-2.5 cursor-pointer ${
                         l === locale
-                          ? 'text-amber-brand bg-[rgba(245,158,11,0.08)]'
+                          ? 'text-amber-brand bg-[rgba(34,197,94,0.08)]'
                           : 'text-dim hover:text-cream hover:bg-bg-card-hover'
                       }`}
                     >
@@ -144,7 +144,7 @@ export default function Nav() {
             {/* CTA */}
             <button
               onClick={() => navigate(`/${locale}/demo`)}
-              className="px-5 py-2 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full text-sm font-semibold transition-all hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] hover:-translate-y-px cursor-pointer"
+              className="px-5 py-2 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full text-sm font-semibold transition-all hover:shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:-translate-y-px cursor-pointer"
             >
               {t.nav.analyze}
             </button>
@@ -225,7 +225,7 @@ export default function Nav() {
           {/* CTA */}
           <button
             onClick={() => navigate(`/${locale}/demo`)}
-            className="w-full py-3 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full text-sm font-semibold transition-all cursor-pointer"
+            className="w-full py-3 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full text-sm font-semibold transition-all cursor-pointer"
           >
             {t.nav.analyze}
           </button>

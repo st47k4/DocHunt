@@ -89,7 +89,7 @@ function riskColor(score: number): string {
 
 function riskBg(score: number): string {
   if (score < 30) return 'bg-green-500/10 border-green-500/30 text-green-400'
-  if (score < 60) return 'bg-amber-500/10 border-amber-500/30 text-amber-brand'
+  if (score < 60) return 'bg-green-500/10 border-green-500/30 text-amber-brand'
   return 'bg-red-500/10 border-red-500/30 text-red-500'
 }
 
@@ -172,10 +172,10 @@ function DropZone<R>({
       onClick={() => !isUploading && inputRef.current?.click()}
       className={`group rounded-[20px] px-10 py-16 text-center transition-all border-2 border-dashed cursor-pointer select-none ${
         isDragging
-          ? 'border-amber-brand bg-[rgba(245,158,11,0.06)] scale-[1.01]'
+          ? 'border-amber-brand bg-[rgba(34,197,94,0.06)] scale-[1.01]'
           : isUploading
             ? 'border-edge bg-bg-card cursor-wait'
-            : 'border-edge bg-bg-card hover:border-amber-brand hover:bg-[rgba(245,158,11,0.02)]'
+            : 'border-edge bg-bg-card hover:border-amber-brand hover:bg-[rgba(34,197,94,0.02)]'
       }`}
     >
       <input ref={inputRef} type="file" accept={accept} className="hidden" />
@@ -194,7 +194,7 @@ function DropZone<R>({
               e.stopPropagation()
               onNewAnalysis()
             }}
-            className="mt-4 px-5 py-2 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full text-sm font-semibold transition-all cursor-pointer"
+            className="mt-4 px-5 py-2 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full text-sm font-semibold transition-all cursor-pointer"
           >
             {t.demo.result.newAnalysis}
           </button>
@@ -480,7 +480,7 @@ function TabButton({
       onClick={onClick}
       className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all cursor-pointer ${
         active
-          ? 'bg-amber-brand text-bg-dark shadow-[0_0_16px_rgba(245,158,11,0.35)]'
+          ? 'bg-amber-brand text-bg-dark shadow-[0_0_16px_rgba(34,197,94,0.35)]'
           : 'text-dim hover:text-cream'
       }`}
     >
@@ -531,10 +531,10 @@ function PdfDropZone({
       onClick={() => !isUploading && inputRef.current?.click()}
       className={`group rounded-[20px] px-10 py-16 text-center transition-all border-2 border-dashed cursor-pointer select-none ${
         isDragging
-          ? 'border-amber-brand bg-[rgba(245,158,11,0.06)] scale-[1.01]'
+          ? 'border-amber-brand bg-[rgba(34,197,94,0.06)] scale-[1.01]'
           : isUploading
             ? 'border-edge bg-bg-card cursor-wait'
-            : 'border-edge bg-bg-card hover:border-amber-brand hover:bg-[rgba(245,158,11,0.02)]'
+            : 'border-edge bg-bg-card hover:border-amber-brand hover:bg-[rgba(34,197,94,0.02)]'
       }`}
     >
       {isUploading ? (
@@ -555,7 +555,7 @@ function PdfDropZone({
               e.stopPropagation()
               setState({ status: 'idle' })
             }}
-            className="px-5 py-2 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full text-sm font-semibold transition-all cursor-pointer"
+            className="px-5 py-2 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full text-sm font-semibold transition-all cursor-pointer"
           >
             {t.demo.result.newAnalysis}
           </button>
@@ -785,8 +785,8 @@ const SENSITIVE_TYPE_COLOR: Record<string, string> = {
   handle: 'text-fuchsia-400',
   email: 'text-red-400',
   phone: 'text-orange-400',
-  siret: 'text-amber-400',
-  siren: 'text-amber-300',
+  siret: 'text-green-400',
+  siren: 'text-green-300',
   tva_fr: 'text-yellow-500',
   iban: 'text-red-500',
   ip_v4: 'text-purple-400',

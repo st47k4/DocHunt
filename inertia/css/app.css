@@ -9,8 +9,8 @@
   --font-mono: 'Space Mono', ui-monospace, monospace;
 
   /* Brand */
-  --color-amber-brand: #f59e0b;
-  --color-amber-dim: #d97706;
+  --color-amber-brand: #22c55e;
+  --color-amber-dim: #16a34a;
 
   /* Dark surfaces */
   --color-bg-dark: #0a0a0c;
@@ -324,7 +324,7 @@ html[data-theme='light'] {
     border-radius: 3px;
   }
   .dark-scroll::-webkit-scrollbar-thumb:hover {
-    background: #d97706;
+    background: #16a34a;
   }
 }
 

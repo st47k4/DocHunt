@@ -38,7 +38,7 @@ export default function Features() {
                 className="group relative bg-bg-card border border-edge rounded-[14px] p-9 overflow-hidden hover:border-edge-hover hover:bg-bg-card-hover hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-brand to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="w-12 h-12 rounded-xl bg-[rgba(245,158,11,0.12)] flex items-center justify-center mb-5">
+                <div className="w-12 h-12 rounded-xl bg-[rgba(34,197,94,0.12)] flex items-center justify-center mb-5">
                   <Icon className="w-5 h-5 text-amber-brand" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2.5">{item.title}</h3>

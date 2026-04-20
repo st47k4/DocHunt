@@ -174,7 +174,7 @@ const es: Translations = {
       resources: { title: 'Recursos', links: ['Documentación', 'API', 'GitHub'] },
       legal: { title: 'Legal', links: ['Privacidad', 'Términos', 'Contacto'] },
     },
-    builtWith: 'Una herramienta de sentrak.info',
+    builtWith: 'Una herramienta de',
   },
   communityPage: {
     badge: 'Open Source',

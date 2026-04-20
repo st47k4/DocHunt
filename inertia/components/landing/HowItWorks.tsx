@@ -34,7 +34,7 @@ export default function HowItWorks() {
               transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
               className="text-center relative"
             >
-              <div className="relative z-10 w-[72px] h-[72px] rounded-full bg-bg-card border-2 border-amber-brand flex items-center justify-center font-mono text-2xl font-bold text-amber-brand mx-auto mb-6 shadow-[0_0_40px_rgba(245,158,11,0.15)]">
+              <div className="relative z-10 w-[72px] h-[72px] rounded-full bg-bg-card border-2 border-amber-brand flex items-center justify-center font-mono text-2xl font-bold text-amber-brand mx-auto mb-6 shadow-[0_0_40px_rgba(34,197,94,0.15)]">
                 0{i + 1}
               </div>
               <h3 className="text-xl font-semibold mb-2.5">{step.title}</h3>

@@ -9,7 +9,7 @@ export default function Cta() {
 
   return (
     <section className="py-[120px] text-center relative overflow-hidden">
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(circle,rgba(245,158,11,0.12)_0%,transparent_60%)] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[radial-gradient(circle,rgba(34,197,94,0.12)_0%,transparent_60%)] pointer-events-none" />
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -24,7 +24,7 @@ export default function Cta() {
           <p className="text-dim text-[17px] max-w-[480px] mx-auto mb-9">{t.cta.subtitle}</p>
           <button
             onClick={() => router.visit(`/${locale}/demo`)}
-            className="inline-flex items-center gap-2.5 px-9 py-4 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full font-semibold text-[17px] shadow-[0_4px_30px_rgba(245,158,11,0.25)] hover:shadow-[0_8px_50px_rgba(245,158,11,0.4)] hover:-translate-y-0.5 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2.5 px-9 py-4 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full font-semibold text-[17px] shadow-[0_4px_30px_rgba(34,197,94,0.25)] hover:shadow-[0_8px_50px_rgba(34,197,94,0.4)] hover:-translate-y-0.5 transition-all cursor-pointer"
           >
             <Search className="w-5 h-5" />
             {t.cta.button}

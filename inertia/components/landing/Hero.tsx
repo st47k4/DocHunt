@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section className="pt-44 pb-24 text-center relative overflow-hidden">
       {/* Radial glow */}
-      <div className="absolute -top-52 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-[radial-gradient(circle,rgba(245,158,11,0.15)_0%,transparent_60%)] pointer-events-none" />
+      <div className="absolute -top-52 left-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-[radial-gradient(circle,rgba(34,197,94,0.15)_0%,transparent_60%)] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
@@ -42,7 +42,7 @@ export default function Hero() {
           className="text-5xl md:text-[76px] font-extrabold tracking-[-2px] leading-[1.05] mb-6"
         >
           {t.hero.titleStart}{' '}
-          <span className="bg-gradient-to-r from-amber-brand via-amber-400 to-amber-dim bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-amber-brand via-green-400 to-amber-dim bg-clip-text text-transparent">
             {t.hero.titleHighlight}
           </span>
           <br />
@@ -56,7 +56,7 @@ export default function Hero() {
         <motion.div {...fadeUp(0.3)} className="flex gap-3.5 justify-center flex-wrap">
           <button
             onClick={() => router.visit(`/${locale}/demo`)}
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full font-semibold text-base shadow-[0_4px_30px_rgba(245,158,11,0.25)] hover:shadow-[0_8px_50px_rgba(245,158,11,0.4)] hover:-translate-y-0.5 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full font-semibold text-base shadow-[0_4px_30px_rgba(34,197,94,0.25)] hover:shadow-[0_8px_50px_rgba(34,197,94,0.4)] hover:-translate-y-0.5 transition-all cursor-pointer"
           >
             <Search className="w-4 h-4" />
             {t.hero.ctaPrimary}

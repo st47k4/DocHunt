@@ -62,8 +62,8 @@ const STACK = [
   {
     name: 'spaCy',
     role: 'NER / NLP',
-    color: 'text-amber-400',
-    bg: 'bg-amber-500/10 border-amber-500/20',
+    color: 'text-green-400',
+    bg: 'bg-green-500/10 border-green-500/20',
   },
   {
     name: 'Docker',
@@ -81,7 +81,7 @@ const STACK = [
 
 const CARD_ICONS = [CircleDot, GitPullRequest, GitFork]
 const CARD_LINKS = [GITHUB_ISSUES, GITHUB_PRS, GITHUB_FORK]
-const CARD_COLORS = ['text-green-400', 'text-purple-400', 'text-amber-400']
+const CARD_COLORS = ['text-green-400', 'text-purple-400', 'text-green-400']
 
 const OPEN_ICONS = [Eye, Layers, Users]
 
@@ -112,7 +112,7 @@ export default function Community() {
                 href={GITHUB_REPO}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full font-semibold transition-all hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] hover:-translate-y-px"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full font-semibold transition-all hover:shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:-translate-y-px"
               >
                 <GitBranch className="w-5 h-5" />
                 {c.ctaGithub}
@@ -242,7 +242,7 @@ export default function Community() {
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   className="bg-bg-card border border-edge rounded-[16px] p-7"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-brand mb-5">
+                  <div className="w-11 h-11 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-amber-brand mb-5">
                     <Icon className="w-5 h-5" />
                   </div>
                   <h3 className="font-semibold text-cream mb-2">{item.title}</h3>
@@ -263,7 +263,7 @@ export default function Community() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-brand mx-auto mb-6">
+            <div className="w-16 h-16 rounded-2xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-amber-brand mx-auto mb-6">
               <ShieldCheck className="w-8 h-8" />
             </div>
             <h2 className="text-3xl font-bold mb-4">DocHunt × GitHub</h2>
@@ -274,7 +274,7 @@ export default function Community() {
               href={GITHUB_REPO}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-8 py-4 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full font-bold text-lg transition-all hover:shadow-[0_0_40px_rgba(245,158,11,0.5)] hover:-translate-y-px"
+              className="inline-flex items-center gap-2.5 px-8 py-4 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full font-bold text-lg transition-all hover:shadow-[0_0_40px_rgba(34,197,94,0.5)] hover:-translate-y-px"
             >
               <GitBranch className="w-5 h-5" />
               Sentrak/DocHunt
