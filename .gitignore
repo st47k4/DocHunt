@@ -5,7 +5,9 @@ tmp/*
 !tmp/.gitkeep
 
 # AdonisJS generated files (auto-générés au build)
-.adonisjs
+/.adonisjs/server/
+/.adonisjs/client/data.d.ts
+/.adonisjs/client/manifest.d.ts
 
 # Python virtual environment
 api/.venv
