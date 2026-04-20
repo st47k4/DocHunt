@@ -13,10 +13,14 @@ import router from '@adonisjs/core/services/router'
 
 const HomeController = () => import('#controllers/home_controller')
 const AnalyzeController = () => import('#controllers/analyze_controller')
+const StatsController = () => import('#controllers/stats_controller')
 
 // Analyse — proxys sécurisés vers le micro-service Python
 router.post('/api/analyze/pdf', [AnalyzeController, 'handlePdf']).as('analyze.pdf')
 router.post('/api/analyze/image', [AnalyzeController, 'handleImage']).as('analyze.image')
+
+// Stats
+router.get('/api/stats', [StatsController, 'index']).as('stats')
 
 // Root → redirect to browser preferred language
 router.get('/', [HomeController, 'root']).as('home')

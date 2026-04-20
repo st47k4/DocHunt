@@ -310,6 +310,10 @@ const es: Translations = {
       },
     ],
   },
+  liveStats: {
+    analyses: 'Análisis realizados',
+    totalData: 'Datos analizados',
+  },
   seo: {
     home: {
       title: 'DocHunt',

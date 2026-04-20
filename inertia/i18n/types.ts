@@ -104,6 +104,10 @@ export interface Translations {
     lastUpdated: string
     sections: Array<{ title: string; content: string }>
   }
+  liveStats: {
+    analyses: string
+    totalData: string
+  }
   seo: {
     home: { title: string; description: string }
     demo: { title: string; description: string }

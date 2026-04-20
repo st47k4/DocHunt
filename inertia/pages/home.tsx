@@ -2,6 +2,7 @@ import { type ReactNode } from 'react'
 import { Head } from '@inertiajs/react'
 import LandingLayout from '~/layouts/landing'
 import Hero from '~/components/landing/Hero'
+import LiveStats from '~/components/landing/LiveStats'
 import Features from '~/components/landing/Features'
 import HowItWorks from '~/components/landing/HowItWorks'
 import Formats from '~/components/landing/Formats'
@@ -25,6 +26,7 @@ export default function Home(_props: Props) {
         <meta name="robots" content="index, follow" />
       </Head>
       <Hero />
+      <LiveStats />
       <Features />
       <HowItWorks />
       <Formats />
