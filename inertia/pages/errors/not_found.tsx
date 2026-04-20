@@ -1,28 +1,31 @@
-import { ScanSearch } from 'lucide-react'
+import { type ReactNode } from 'react'
+import { Head, Link } from '@inertiajs/react'
+import LandingLayout from '~/layouts/landing'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-bg-dark flex items-center justify-center px-6">
-      <div className="text-center max-w-md">
-        <div className="flex justify-center mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-brand to-amber-dim flex items-center justify-center shadow-[0_0_32px_rgba(245,158,11,0.2)]">
-            <ScanSearch className="w-7 h-7 text-bg-dark" />
-          </div>
-        </div>
-        <p className="text-amber-brand font-mono text-sm font-semibold tracking-widest uppercase mb-4">
-          404
+    <>
+      <Head>
+        <title>404 — Page not found · DocHunt</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
+      <div className="min-h-[70vh] flex flex-col items-center justify-center px-6 text-center">
+        <p className="font-mono text-xs uppercase tracking-[3px] text-amber-brand mb-4">
+          Error 404
         </p>
-        <h1 className="text-3xl font-bold text-cream mb-3">Page not found</h1>
-        <p className="text-mute text-sm leading-relaxed mb-8">
+        <h1 className="text-5xl md:text-6xl font-bold text-cream mb-4">Page not found</h1>
+        <p className="text-cream/50 text-lg max-w-md mb-10">
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <a
+        <Link
           href="/"
-          className="inline-flex items-center gap-2 bg-amber-brand hover:bg-amber-dim text-bg-dark font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
+          className="inline-flex items-center gap-2 px-7 py-3.5 bg-amber-brand hover:bg-amber-400 text-bg-dark rounded-full font-semibold text-base shadow-[0_4px_30px_rgba(245,158,11,0.25)] hover:shadow-[0_8px_50px_rgba(245,158,11,0.4)] hover:-translate-y-0.5 transition-all"
         >
           Back to home
-        </a>
+        </Link>
       </div>
-    </div>
+    </>
   )
 }
+
+NotFound.layout = (page: ReactNode) => <LandingLayout>{page}</LandingLayout>
