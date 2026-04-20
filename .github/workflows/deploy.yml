@@ -19,8 +19,19 @@ jobs:
         run: |
           npm ci
           node ace build
+          cd build && npm ci --omit=dev
 
-      - name: Deploy to VPS
+      - name: Upload build to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DOCHUNT_VPS_HOST }}
+          username: dochunt
+          key: ${{ secrets.DOCHUNT_VPS_SSH_KEY }}
+          port: 52200
+          source: "build/"
+          target: "/var/www/dochunt/"
+
+      - name: Restart app
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DOCHUNT_VPS_HOST }}
@@ -28,12 +39,7 @@ jobs:
           key: ${{ secrets.DOCHUNT_VPS_SSH_KEY }}
           port: 52200
           script: |
-            cd /var/www/dochunt
-            git pull origin main
-            npm ci --omit=dev
-            node ace build
-            cp .env build/.env
+            cp /var/www/dochunt/.env /var/www/dochunt/build/.env
             ln -sfn /var/www/dochunt/tmp /var/www/dochunt/build/tmp
-            cd build && node ace migration:run && cd ..
-            docker compose up -d --build api
-            pm2 restart dochunt
+            cd /var/www/dochunt/build && node ace migration:run
+            pm2 restart dochunt --update-env
