@@ -2,6 +2,7 @@ import { readFile, unlink } from 'node:fs/promises'
 import { basename } from 'node:path'
 import type { HttpContext } from '@adonisjs/core/http'
 import env from '#start/env'
+import statsService from '#services/stats_service'
 
 const MAX_SIZE_BYTES = 20 * 1024 * 1024 // 20 Mo
 const MAX_FILENAME_LENGTH = 255
@@ -82,6 +83,7 @@ async function proxyToPython(
     return response.status(pyResponse.status).json({ error: detail })
   }
 
+  statsService.increment(data.length).catch(() => {})
   return response.json(await pyResponse.json())
 }
 
