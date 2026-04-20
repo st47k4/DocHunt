@@ -173,7 +173,7 @@ const fr: Translations = {
       resources: { title: 'Ressources', links: ['Documentation', 'API', 'GitHub'] },
       legal: { title: 'Légal', links: ['Confidentialité', 'CGU', 'Contact'] },
     },
-    builtWith: 'Construit avec AdonisJS, TypeScript & Inertia.js',
+    builtWith: 'Un outil par sentrak.info',
   },
   communityPage: {
     badge: 'Open Source',
