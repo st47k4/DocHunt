@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react'
-import { Head, Link } from '@inertiajs/react'
+import { Head } from '@inertiajs/react'
+import { Link } from '@adonisjs/inertia/react'
 import LandingLayout from '~/layouts/landing'
 
 export default function ServerError() {

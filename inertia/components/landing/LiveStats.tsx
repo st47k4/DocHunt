@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { useT } from '~/i18n/context'
-import { useStats } from '~/hooks/useStats'
+import { useStats } from '~/hooks/use_stats'
 
 function formatBytes(bytes: number): string {
   if (bytes === 0) return '0 B'
