@@ -1,5 +1,7 @@
 import io
 import re
+import unicodedata
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 import pikepdf
@@ -24,6 +26,42 @@ def _get_nlp() -> "Language":
         # pour réduire la mémoire et doubler la vitesse de traitement
         _nlp = spacy.load("fr_core_news_md", disable=["parser", "tagger", "lemmatizer"])
     return _nlp
+
+
+# Chargement lazy des dictionnaires de villes (FR + mondial)
+# Les fichiers utilisent des tirets dans leur nom → importlib.util obligatoire
+_cities: "frozenset[str] | None" = None
+_cities_norm: "frozenset[str] | None" = None
+_DATA_DIR = Path(__file__).parent.parent / "data"
+
+
+def _normalize_loc(s: str) -> str:
+    return unicodedata.normalize("NFD", s.lower()).encode("ascii", "ignore").decode()
+
+
+_CITY_LINE = re.compile(r'^\s+"(.+)",\s*$')
+
+
+def _get_cities() -> tuple[frozenset[str], frozenset[str]]:
+    """Parse les fichiers de villes comme du texte pour éviter les problèmes d'import."""
+    global _cities, _cities_norm
+    if _cities is None:
+        names: set[str] = set()
+        for fname in ("cities-france.py", "cities-world.py"):
+            fpath = _DATA_DIR / fname
+            if not fpath.exists():
+                continue
+            try:
+                with open(fpath, encoding="utf-8") as f:
+                    for line in f:
+                        m = _CITY_LINE.match(line)
+                        if m:
+                            names.add(m.group(1))
+            except Exception:
+                pass
+        _cities = frozenset(names)
+        _cities_norm = frozenset(_normalize_loc(n) for n in names)
+    return _cities, _cities_norm
 
 
 # Champs du dictionnaire Info d'un PDF avec leur label humain et leur sensibilité
@@ -477,17 +515,35 @@ def _ner_valid(label: str, value: str) -> bool:
         return True
 
     if label in ("LOC", "GPE"):
-        # Lieu : 1 à 3 mots, commence par une majuscule, pas un outil tech
         if len(words) > 3 or len(value) > 40:
             return False
         if not value[0].isupper():
             return False
         if words[0].lower() in _TECH_NAMES or value.lower() in _TECH_NAMES:
             return False
-        # Rejeter les chaînes entièrement en minuscules
         if value.islower():
             return False
-        return True
+
+        cities, cities_norm = _get_cities()
+        if not cities:
+            return True  # dicos absents → comportement original
+
+        norm_value = _normalize_loc(value)
+
+        # 1. Correspondance exacte sur la chaîne complète
+        if value in cities or norm_value in cities_norm:
+            return True
+
+        # 2. Correspondance sur le premier mot significatif
+        # (couvre "Paris 15e", "Lyon Confluence", etc.)
+        significant = [w for w in words if w.lower() not in _CONNECTORS and len(w) > 2]
+        if significant and (
+            significant[0] in cities
+            or _normalize_loc(significant[0]) in cities_norm
+        ):
+            return True
+
+        return False  # aucune correspondance → faux positif rejeté
 
     if label == "ORG":
         # Organisation : 2 à 5 mots, commence par une majuscule
