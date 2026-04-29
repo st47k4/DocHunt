@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from logger import setup_logging
 from routers.pdf import router as pdf_router
 from routers.image import router as image_router
+from routers.office import router as office_router
 
 setup_logging()
 
@@ -27,6 +28,7 @@ app.add_middleware(
 
 app.include_router(pdf_router)
 app.include_router(image_router)
+app.include_router(office_router)
 
 
 @app.get("/health")

@@ -47,3 +47,25 @@ class ImageAnalysisResult(BaseModel):
     gps_latitude: float | None = None
     gps_longitude: float | None = None
     sensitive_matches: list[SensitiveMatch] = []
+
+
+# ── Office (DOCX / XLSX / PPTX) ───────────────────────────────────────────────
+
+class OfficeComment(BaseModel):
+    author: str = ""
+    date: str | None = None
+    text: str = ""
+
+
+class OfficeAnalysisResult(BaseModel):
+    filename: str
+    file_size: int
+    file_type: str                          # docx, xlsx, pptx
+    risk_score: int                         # 0 à 100
+    fields: list[MetadataField]
+    warnings: list[str]
+    has_tracked_changes: bool = False
+    deleted_text_snippets: list[str] = []   # texte supprimé récupérable
+    comments: list[OfficeComment] = []
+    embedded_urls: list[str] = []
+    sensitive_matches: list[SensitiveMatch] = []

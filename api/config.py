@@ -17,3 +17,7 @@ IMAGE_MAGIC_WEBP = b"WEBP"   # WebP a WEBP à l'offset 8
 IMAGE_MAGIC_GIF  = b"GIF8"   # GIF87a / GIF89a
 IMAGE_MAGIC_ICO  = bytes([0x00, 0x00, 0x01, 0x00])
 ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".ico"}
+
+# ── Office (DOCX / XLSX / PPTX) ───────────────────────────────────────────────
+OFFICE_MAGIC = bytes([0x50, 0x4B, 0x03, 0x04])  # PK\x03\x04 — ZIP local file header
+ALLOWED_OFFICE_EXTENSIONS = {".docx", ".xlsx", ".pptx"}
