@@ -4,10 +4,10 @@ import type { LucideIcon } from 'lucide-react'
 import { useT } from '~/i18n/context'
 
 const ICONS: { icon: LucideIcon; ext: string; color: string; soon: boolean }[] = [
-  { icon: FileText, ext: '.PDF', color: 'text-red-500', soon: false },
-  { icon: FileType2, ext: '.DOCX', color: 'text-blue-500', soon: true },
-  { icon: Image, ext: '.JPG', color: 'text-purple-500', soon: true },
-  { icon: Sheet, ext: '.XLSX', color: 'text-green-500', soon: true },
+  { icon: FileText, ext: '.PDF',       color: 'text-red-500',    soon: false },
+  { icon: FileType2, ext: '.DOCX',     color: 'text-blue-500',   soon: false },
+  { icon: Image,    ext: '.JPG / .PNG', color: 'text-purple-500', soon: false },
+  { icon: Sheet,    ext: '.XLSX / .PPTX', color: 'text-green-500', soon: false },
 ]
 
 export default function Formats() {

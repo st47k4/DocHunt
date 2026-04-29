@@ -4,9 +4,11 @@ import {
   AlertCircle,
   Download,
   FileImage,
+  FileText,
   FileUp,
   Loader2,
   MapPin,
+  MessageSquare,
   ShieldAlert,
   ShieldCheck,
   TriangleAlert,
@@ -59,6 +61,26 @@ interface ImageResult {
   sensitive_matches: SensitiveMatch[]
 }
 
+interface OfficeComment {
+  author: string
+  date: string | null
+  text: string
+}
+
+interface OfficeResult {
+  filename: string
+  file_size: number
+  file_type: string
+  risk_score: number
+  fields: MetadataField[]
+  warnings: string[]
+  has_tracked_changes: boolean
+  deleted_text_snippets: string[]
+  comments: OfficeComment[]
+  embedded_urls: string[]
+  sensitive_matches: SensitiveMatch[]
+}
+
 type TabState<R> =
   | { status: 'idle' }
   | { status: 'dragging' }
@@ -101,146 +123,23 @@ const FORMAT_COLOR: Record<string, string> = {
   ICO: 'bg-slate-500',
 }
 
-// ── DropZone partagé ─────────────────────────────────────────────────────────
-
-interface DropZoneProps<R> {
-  state: TabState<R>
-  setState: (s: TabState<R>) => void
-  inputRef: React.RefObject<HTMLInputElement | null>
-  accept: string
-  uploadHint: string
-  formatsHint: string
-  titleIdle: string
-  titleDragging: string
-  subtitleIdle: string
-  renderSuccess: (result: R) => React.ReactNode
-  onNewAnalysis: () => void
-  t: ReturnType<typeof useT>
-}
-
-function DropZone<R>({
-  state,
-  setState,
-  inputRef,
-  accept,
-  uploadHint,
-  formatsHint,
-  titleIdle,
-  titleDragging,
-  subtitleIdle,
-  renderSuccess,
-  onNewAnalysis,
-  t,
-}: DropZoneProps<R>) {
-  const dragCounter = useRef(0)
-
-  const onDragEnter = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault()
-      dragCounter.current++
-      if (state.status !== 'uploading') setState({ status: 'dragging' })
-    },
-    [state.status, setState]
-  )
-  const onDragLeave = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault()
-      dragCounter.current--
-      if (dragCounter.current === 0) setState({ status: 'idle' })
-    },
-    [setState]
-  )
-  const onDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault()
-    dragCounter.current = 0
-    // handled by parent
-  }, [])
-
-  const isDragging = state.status === 'dragging'
-  const isUploading = state.status === 'uploading'
-
-  return (
-    <div
-      onDragEnter={onDragEnter}
-      onDragOver={(e) => e.preventDefault()}
-      onDragLeave={onDragLeave}
-      onDrop={(e) => {
-        onDrop(e)
-        const file = e.dataTransfer.files[0]
-        if (file) (inputRef.current as any)?._onFile?.(file)
-      }}
-      onClick={() => !isUploading && inputRef.current?.click()}
-      className={`group rounded-[20px] px-10 py-16 text-center transition-all border-2 border-dashed cursor-pointer select-none ${
-        isDragging
-          ? 'border-amber-brand bg-[rgba(34,197,94,0.06)] scale-[1.01]'
-          : isUploading
-            ? 'border-edge bg-bg-card cursor-wait'
-            : 'border-edge bg-bg-card hover:border-amber-brand hover:bg-[rgba(34,197,94,0.02)]'
-      }`}
-    >
-      <input ref={inputRef} type="file" accept={accept} className="hidden" />
-
-      {isUploading ? (
-        <>
-          <Loader2 className="w-12 h-12 text-amber-brand animate-spin mx-auto mb-4" />
-          <p className="text-lg font-semibold">{t.demo.result.loading}</p>
-        </>
-      ) : state.status === 'success' ? (
-        <>
-          <ShieldCheck className="w-12 h-12 text-amber-brand mx-auto mb-4" />
-          {renderSuccess(state.result)}
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              onNewAnalysis()
-            }}
-            className="mt-4 px-5 py-2 bg-amber-brand hover:bg-green-400 text-bg-dark rounded-full text-sm font-semibold transition-all cursor-pointer"
-          >
-            {t.demo.result.newAnalysis}
-          </button>
-        </>
-      ) : state.status === 'error' ? (
-        <>
-          <ShieldAlert className="w-12 h-12 text-red-500 mx-auto mb-4" />
-          <p className="text-lg font-semibold text-red-500 mb-1">{t.demo.result.errorTitle}</p>
-          <p className="text-dim text-sm mb-5">{state.message}</p>
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              onNewAnalysis()
-            }}
-            className="px-5 py-2 bg-bg-secondary border border-edge hover:border-amber-brand/50 rounded-full text-sm font-medium text-dim hover:text-cream transition-all cursor-pointer"
-          >
-            {t.demo.result.newAnalysis}
-          </button>
-        </>
-      ) : (
-        <>
-          <FileUp
-            className={`w-12 h-12 mx-auto mb-4 transition-all ${
-              isDragging
-                ? 'text-amber-brand -translate-y-1'
-                : 'text-mute group-hover:text-amber-brand group-hover:-translate-y-1'
-            }`}
-          />
-          <h3 className="text-lg font-semibold mb-2">{isDragging ? titleDragging : titleIdle}</h3>
-          <p className="text-dim text-sm mb-2">{subtitleIdle}</p>
-          <p className="font-mono text-[11px] text-mute">{formatsHint}</p>
-        </>
-      )}
-    </div>
-  )
+const OFFICE_TYPE_COLOR: Record<string, string> = {
+  docx: 'bg-blue-600',
+  xlsx: 'bg-green-600',
+  pptx: 'bg-orange-500',
 }
 
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function UploadDemo() {
   const t = useT()
-  const [activeTab, setActiveTab] = useState<'pdf' | 'image'>('pdf')
+  const [activeTab, setActiveTab] = useState<'pdf' | 'image' | 'office'>('pdf')
   const [pdfState, setPdfState] = useState<TabState<PdfResult>>({ status: 'idle' })
   const [imageState, setImageState] = useState<TabState<ImageResult>>({ status: 'idle' })
+  const [officeState, setOfficeState] = useState<TabState<OfficeResult>>({ status: 'idle' })
   const pdfInputRef = useRef<HTMLInputElement>(null)
   const imageInputRef = useRef<HTMLInputElement>(null)
+  const officeInputRef = useRef<HTMLInputElement>(null)
 
   // ── PDF upload ─────────────────────────────────────────────────────────────
 
@@ -308,6 +207,41 @@ export default function UploadDemo() {
     }
   }, [])
 
+  // ── Office upload ──────────────────────────────────────────────────────────
+
+  const analyzeOffice = useCallback(async (file: File) => {
+    const ext = file.name.toLowerCase().split('.').pop() ?? ''
+    if (!['docx', 'xlsx', 'pptx'].includes(ext)) {
+      setOfficeState({
+        status: 'error',
+        message: 'Format non supporté. Acceptés : DOCX, XLSX, PPTX.',
+      })
+      return
+    }
+    if (file.size > MAX_SIZE) {
+      setOfficeState({ status: 'error', message: 'Fichier trop volumineux (max 20 Mo).' })
+      return
+    }
+    setOfficeState({ status: 'uploading' })
+    try {
+      const form = new FormData()
+      form.append('file', file)
+      const res = await fetch('/api/analyze/office', {
+        method: 'POST',
+        headers: { 'X-XSRF-TOKEN': getCsrfToken() },
+        body: form,
+      })
+      const json = await res.json()
+      if (!res.ok) {
+        setOfficeState({ status: 'error', message: json.error ?? "Erreur lors de l'analyse." })
+        return
+      }
+      setOfficeState({ status: 'success', result: json as OfficeResult })
+    } catch {
+      setOfficeState({ status: 'error', message: 'Impossible de contacter le service.' })
+    }
+  }, [])
+
   // ── Wire file inputs ───────────────────────────────────────────────────────
 
   const onPdfChange = useCallback(
@@ -328,9 +262,18 @@ export default function UploadDemo() {
     [analyzeImage]
   )
 
-  // Attach onChange to real inputs via effect pattern
+  const onOfficeChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0]
+      if (file) analyzeOffice(file)
+      e.target.value = ''
+    },
+    [analyzeOffice]
+  )
+
   const attachPdfDrop = useCallback((file: File) => analyzePdf(file), [analyzePdf])
   const attachImageDrop = useCallback((file: File) => analyzeImage(file), [analyzeImage])
+  const attachOfficeDrop = useCallback((file: File) => analyzeOffice(file), [analyzeOffice])
 
   return (
     <section id="demo" className="py-[120px] bg-bg-secondary border-t border-b border-edge">
@@ -373,6 +316,13 @@ export default function UploadDemo() {
               color="text-blue-400"
               onClick={() => setActiveTab('image')}
             />
+            <TabButton
+              label={t.demo.tabs.office}
+              icon={<FileText className="w-3.5 h-3.5" />}
+              active={activeTab === 'office'}
+              color="text-violet-400"
+              onClick={() => setActiveTab('office')}
+            />
           </div>
         </motion.div>
 
@@ -387,7 +337,6 @@ export default function UploadDemo() {
           {activeTab === 'pdf' ? (
             <>
               <div className="grid md:grid-cols-2 gap-12 items-start">
-                {/* PDF Drop zone */}
                 <div>
                   <input
                     ref={pdfInputRef}
@@ -404,7 +353,6 @@ export default function UploadDemo() {
                     t={t}
                   />
                 </div>
-                {/* PDF Meta card */}
                 <div className="bg-bg-card border border-edge rounded-[14px] overflow-hidden">
                   {pdfState.status === 'success' ? (
                     <PdfMetaCard result={pdfState.result} t={t} />
@@ -420,10 +368,9 @@ export default function UploadDemo() {
                 />
               )}
             </>
-          ) : (
+          ) : activeTab === 'image' ? (
             <>
               <div className="grid md:grid-cols-2 gap-12 items-start">
-                {/* Image Drop zone */}
                 <div>
                   <input
                     ref={imageInputRef}
@@ -440,7 +387,6 @@ export default function UploadDemo() {
                     t={t}
                   />
                 </div>
-                {/* Image Meta card */}
                 <div className="bg-bg-card border border-edge rounded-[14px] overflow-hidden">
                   {imageState.status === 'success' ? (
                     <ImageMetaCard result={imageState.result} t={t} />
@@ -451,6 +397,40 @@ export default function UploadDemo() {
               </div>
               {imageState.status === 'success' && (
                 <DetectedCard matches={imageState.result.sensitive_matches ?? []} urls={[]} />
+              )}
+            </>
+          ) : (
+            <>
+              <div className="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                  <input
+                    ref={officeInputRef}
+                    type="file"
+                    accept=".docx,.xlsx,.pptx"
+                    className="hidden"
+                    onChange={onOfficeChange}
+                  />
+                  <OfficeDropZone
+                    state={officeState}
+                    setState={setOfficeState}
+                    inputRef={officeInputRef}
+                    onFile={attachOfficeDrop}
+                    t={t}
+                  />
+                </div>
+                <div className="bg-bg-card border border-edge rounded-[14px] overflow-hidden">
+                  {officeState.status === 'success' ? (
+                    <OfficeMetaCard result={officeState.result} t={t} />
+                  ) : (
+                    <OfficeMockPanel t={t} />
+                  )}
+                </div>
+              </div>
+              {officeState.status === 'success' && (
+                <DetectedCard
+                  matches={officeState.result.sensitive_matches ?? []}
+                  urls={officeState.result.embedded_urls ?? []}
+                />
               )}
             </>
           )}
@@ -692,6 +672,106 @@ function ImageDropZone({
   )
 }
 
+// ── Office Drop Zone ──────────────────────────────────────────────────────────
+
+function OfficeDropZone({
+  state,
+  setState,
+  inputRef,
+  onFile,
+  t,
+}: {
+  state: TabState<OfficeResult>
+  setState: (s: TabState<OfficeResult>) => void
+  inputRef: React.RefObject<HTMLInputElement | null>
+  onFile: (f: File) => void
+  t: ReturnType<typeof useT>
+}) {
+  const dragCounter = useRef(0)
+  const isDragging = state.status === 'dragging'
+  const isUploading = state.status === 'uploading'
+
+  return (
+    <div
+      onDragEnter={(e) => {
+        e.preventDefault()
+        dragCounter.current++
+        if (!isUploading) setState({ status: 'dragging' })
+      }}
+      onDragOver={(e) => e.preventDefault()}
+      onDragLeave={(e) => {
+        e.preventDefault()
+        dragCounter.current--
+        if (dragCounter.current === 0) setState({ status: 'idle' })
+      }}
+      onDrop={(e) => {
+        e.preventDefault()
+        dragCounter.current = 0
+        const f = e.dataTransfer.files[0]
+        if (f) onFile(f)
+      }}
+      onClick={() => !isUploading && inputRef.current?.click()}
+      className={`group rounded-[20px] px-10 py-16 text-center transition-all border-2 border-dashed cursor-pointer select-none ${
+        isDragging
+          ? 'border-violet-500 bg-[rgba(139,92,246,0.06)] scale-[1.01]'
+          : isUploading
+            ? 'border-edge bg-bg-card cursor-wait'
+            : 'border-edge bg-bg-card hover:border-violet-500 hover:bg-[rgba(139,92,246,0.02)]'
+      }`}
+    >
+      {isUploading ? (
+        <>
+          <Loader2 className="w-12 h-12 text-violet-400 animate-spin mx-auto mb-4" />
+          <p className="text-lg font-semibold">{t.demo.result.loading}</p>
+        </>
+      ) : state.status === 'success' ? (
+        <>
+          <ShieldCheck className="w-12 h-12 text-violet-400 mx-auto mb-4" />
+          <p className="text-lg font-semibold mb-1">{state.result.filename}</p>
+          <p className="text-dim text-sm mb-4">
+            {formatBytes(state.result.file_size)} · {state.result.file_type.toUpperCase()}
+          </p>
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setState({ status: 'idle' })
+            }}
+            className="px-5 py-2 bg-violet-600 hover:bg-violet-500 text-white rounded-full text-sm font-semibold transition-all cursor-pointer"
+          >
+            {t.demo.result.newAnalysis}
+          </button>
+        </>
+      ) : state.status === 'error' ? (
+        <>
+          <ShieldAlert className="w-12 h-12 text-red-500 mx-auto mb-4" />
+          <p className="text-lg font-semibold text-red-500 mb-1">{t.demo.result.errorTitle}</p>
+          <p className="text-dim text-sm mb-4">{state.message}</p>
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setState({ status: 'idle' })
+            }}
+            className="px-5 py-2 bg-bg-secondary border border-edge rounded-full text-sm font-medium text-dim hover:text-cream transition-all cursor-pointer"
+          >
+            {t.demo.result.newAnalysis}
+          </button>
+        </>
+      ) : (
+        <>
+          <FileText
+            className={`w-12 h-12 mx-auto mb-4 transition-all ${isDragging ? 'text-violet-400 -translate-y-1' : 'text-mute group-hover:text-violet-400 group-hover:-translate-y-1'}`}
+          />
+          <h3 className="text-lg font-semibold mb-2">
+            {isDragging ? t.demo.officeUpload.dragging : t.demo.officeUpload.title}
+          </h3>
+          <p className="text-dim text-sm mb-2">{t.demo.officeUpload.subtitle}</p>
+          <p className="font-mono text-[11px] text-mute">{t.demo.officeUpload.formats}</p>
+        </>
+      )}
+    </div>
+  )
+}
+
 // ── Mock panels ───────────────────────────────────────────────────────────────
 
 const PDF_MOCK_ROWS = [
@@ -712,28 +792,51 @@ const IMAGE_MOCK_ROWS = [
   { label: 'GPS — LONGITUDE', value: '2.352200°', sensitive: true },
 ]
 
+const OFFICE_MOCK_ROWS = [
+  { label: 'AUTEUR', value: 'Jean-Marc Dupont', sensitive: true },
+  { label: 'SOCIÉTÉ', value: 'Acme Corp.', sensitive: true },
+  { label: 'DERNIÈRE MODIF. PAR', value: 'Marie Martin', sensitive: true },
+  { label: 'TEMPLATE', value: 'Modèle Confidentiel.dotx', sensitive: true },
+  { label: 'RÉVISIONS', value: '47', sensitive: true },
+  { label: 'DATE DE CRÉATION', value: '2024-11-03', sensitive: false },
+]
+
 function MockPanel({
   rows,
   badge,
+  badgeColor,
   t,
+  extra,
 }: {
   rows: typeof PDF_MOCK_ROWS
   badge: string
+  badgeColor: string
   t: ReturnType<typeof useT>
+  extra?: React.ReactNode
 }) {
   return (
     <>
       <div className="px-5 py-4 flex items-center justify-between border-b border-edge">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-red-500 rounded-lg flex items-center justify-center font-bold text-white text-xs">
+          <div
+            className={`w-9 h-9 ${badgeColor} rounded-lg flex items-center justify-center font-bold text-white text-xs`}
+          >
             {badge}
           </div>
           <div>
             <div className="text-sm font-semibold">
-              {badge === 'PDF' ? 'rapport-confidentiel.pdf' : 'photo-vacances.jpg'}
+              {badge === 'PDF'
+                ? 'rapport-confidentiel.pdf'
+                : badge === 'IMG'
+                  ? 'photo-vacances.jpg'
+                  : 'contrat-nda.docx'}
             </div>
             <div className="text-xs text-mute">
-              {badge === 'PDF' ? '2.4 MB · 24 pages' : '3.1 MB · 4032×3024'}
+              {badge === 'PDF'
+                ? '2.4 MB · 24 pages'
+                : badge === 'IMG'
+                  ? '3.1 MB · 4032×3024'
+                  : '1.8 MB · DOCX'}
             </div>
           </div>
         </div>
@@ -742,6 +845,7 @@ function MockPanel({
           {t.demo.result.status}
         </div>
       </div>
+      {extra}
       <div>
         {rows.map((row) => (
           <div
@@ -771,11 +875,32 @@ function MockPanel({
 }
 
 function PdfMockPanel({ t }: { t: ReturnType<typeof useT> }) {
-  return <MockPanel rows={PDF_MOCK_ROWS} badge="PDF" t={t} />
+  return <MockPanel rows={PDF_MOCK_ROWS} badge="PDF" badgeColor="bg-red-500" t={t} />
 }
 
 function ImageMockPanel({ t }: { t: ReturnType<typeof useT> }) {
-  return <MockPanel rows={IMAGE_MOCK_ROWS} badge="IMG" t={t} />
+  return <MockPanel rows={IMAGE_MOCK_ROWS} badge="IMG" badgeColor="bg-blue-500" t={t} />
+}
+
+function OfficeMockPanel({ t }: { t: ReturnType<typeof useT> }) {
+  return (
+    <MockPanel
+      rows={OFFICE_MOCK_ROWS}
+      badge="DOC"
+      badgeColor="bg-violet-600"
+      t={t}
+      extra={
+        <div className="px-5 py-2 flex flex-wrap gap-2 border-b border-edge">
+          <span className="px-2.5 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-[11px] font-medium text-orange-400">
+            3 tracked changes
+          </span>
+          <span className="px-2.5 py-1 bg-violet-500/10 border border-violet-500/30 rounded-full text-[11px] font-medium text-violet-400">
+            2 commentaires
+          </span>
+        </div>
+      }
+    />
+  )
 }
 
 // ── Result cards ──────────────────────────────────────────────────────────────
@@ -974,6 +1099,55 @@ function ImageMetaCard({ result, t }: { result: ImageResult; t: ReturnType<typeo
   )
 }
 
+function OfficeMetaCard({ result, t }: { result: OfficeResult; t: ReturnType<typeof useT> }) {
+  const badgeColor = OFFICE_TYPE_COLOR[result.file_type] ?? 'bg-violet-600'
+  return (
+    <>
+      <div className="px-5 py-4 flex items-center justify-between border-b border-edge">
+        <div className="flex items-center gap-3">
+          <div
+            className={`w-9 h-9 ${badgeColor} rounded-lg flex items-center justify-center font-bold text-white text-[9px] uppercase`}
+          >
+            {result.file_type}
+          </div>
+          <div>
+            <div className="text-sm font-semibold truncate max-w-[160px]">{result.filename}</div>
+            <div className="text-xs text-mute">{formatBytes(result.file_size)}</div>
+          </div>
+        </div>
+        <div
+          className={`inline-flex items-center gap-1.5 px-3 py-1 border rounded-full text-xs font-bold ${riskBg(result.risk_score)}`}
+        >
+          {result.risk_score}/100
+        </div>
+      </div>
+      {(result.has_tracked_changes || result.comments.length > 0) && (
+        <div className="px-5 py-2 flex flex-wrap gap-2 border-b border-edge">
+          {result.has_tracked_changes && (
+            <span className="px-2.5 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-[11px] font-medium text-orange-400">
+              {result.deleted_text_snippets.length} tracked change
+              {result.deleted_text_snippets.length > 1 ? 's' : ''}
+            </span>
+          )}
+          {result.comments.length > 0 && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-violet-500/10 border border-violet-500/30 rounded-full text-[11px] font-medium text-violet-400">
+              <MessageSquare className="w-3 h-3" />
+              {result.comments.length} commentaire{result.comments.length > 1 ? 's' : ''}
+            </span>
+          )}
+        </div>
+      )}
+      <FieldsTable fields={result.fields} />
+      <WarningsAndFooter
+        warnings={result.warnings}
+        riskScore={result.risk_score}
+        onExport={() => exportOfficeJson(result)}
+        t={t}
+      />
+    </>
+  )
+}
+
 // ── Detected card (shared) ────────────────────────────────────────────────────
 
 const TYPE_GROUP: Record<string, string> = {
@@ -1124,6 +1298,33 @@ function exportImageJson(result: ImageResult) {
         : null,
       warnings: result.warnings,
       metadata: result.fields,
+      sensitive_matches: result.sensitive_matches,
+    },
+    `dochunt-${result.filename.replace(/\.[^.]+$/, '')}-${Date.now()}.json`
+  )
+}
+
+function exportOfficeJson(result: OfficeResult) {
+  downloadJson(
+    {
+      export_date: new Date().toISOString(),
+      type: result.file_type,
+      file: {
+        name: result.filename,
+        size_bytes: result.file_size,
+        size_human: formatBytes(result.file_size),
+        file_type: result.file_type,
+      },
+      risk_score: result.risk_score,
+      flags: {
+        has_tracked_changes: result.has_tracked_changes,
+        comments_count: result.comments.length,
+      },
+      warnings: result.warnings,
+      metadata: result.fields,
+      deleted_text_snippets: result.deleted_text_snippets,
+      comments: result.comments,
+      embedded_urls: result.embedded_urls,
       sensitive_matches: result.sensitive_matches,
     },
     `dochunt-${result.filename.replace(/\.[^.]+$/, '')}-${Date.now()}.json`
