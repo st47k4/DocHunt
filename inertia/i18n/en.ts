@@ -86,7 +86,7 @@ const en: Translations = {
     tag: 'Try it',
     title: 'See for yourself.',
     subtitle: 'Upload a file and instantly discover the information it exposes.',
-    tabs: { pdf: 'PDF', image: 'Image' },
+    tabs: { pdf: 'PDF', image: 'Image', office: 'Office' },
     upload: {
       title: 'Drop your file here',
       subtitle: 'or click to browse',
@@ -97,6 +97,12 @@ const en: Translations = {
       title: 'Drop your image here',
       subtitle: 'or click to browse',
       formats: 'JPEG, PNG, WebP, GIF, ICO · max 20 MB',
+      dragging: 'Drop to analyze',
+    },
+    officeUpload: {
+      title: 'Drop your Office file here',
+      subtitle: 'or click to browse',
+      formats: 'DOCX, XLSX, PPTX · max 20 MB',
       dragging: 'Drop to analyze',
     },
     result: {
@@ -116,13 +122,13 @@ const en: Translations = {
   formats: {
     tag: 'Compatibility',
     title: 'Supported formats',
-    subtitle: 'Start with PDFs — more formats coming soon.',
+    subtitle: 'PDF, images, and Office documents — all supported today.',
     soon: 'Soon',
     items: [
-      { label: 'PDF documents', description: 'Metadata, author, XMP, links' },
-      { label: 'Word documents', description: 'Properties, comments, revisions' },
-      { label: 'Images', description: 'EXIF, GPS, camera info' },
-      { label: 'Excel spreadsheets', description: 'Hidden sheets, macros, author' },
+      { label: 'PDF documents', description: 'Metadata, author, XMP, JS, embedded files' },
+      { label: 'Word documents', description: 'Author, company, tracked changes, comments' },
+      { label: 'Images', description: 'EXIF, GPS coordinates, camera model' },
+      { label: 'Excel & PowerPoint', description: 'Author, company, comments, hyperlinks' },
     ],
   },
   faq: {

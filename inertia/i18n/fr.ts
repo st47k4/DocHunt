@@ -88,7 +88,7 @@ const fr: Translations = {
     tag: 'Essayer',
     title: 'Voyez par vous-même.',
     subtitle: "Uploadez un fichier et découvrez instantanément les informations qu'il expose.",
-    tabs: { pdf: 'PDF', image: 'Image' },
+    tabs: { pdf: 'PDF', image: 'Image', office: 'Office' },
     upload: {
       title: 'Glissez votre fichier ici',
       subtitle: 'ou cliquez pour sélectionner',
@@ -99,6 +99,12 @@ const fr: Translations = {
       title: 'Glissez votre image ici',
       subtitle: 'ou cliquez pour sélectionner',
       formats: 'JPEG, PNG, WebP, GIF, ICO · max 20 Mo',
+      dragging: 'Relâchez pour analyser',
+    },
+    officeUpload: {
+      title: 'Glissez votre fichier Office ici',
+      subtitle: 'ou cliquez pour sélectionner',
+      formats: 'DOCX, XLSX, PPTX · max 20 Mo',
       dragging: 'Relâchez pour analyser',
     },
     result: {
@@ -118,13 +124,13 @@ const fr: Translations = {
   formats: {
     tag: 'Compatibilité',
     title: 'Formats supportés',
-    subtitle: "Commencez avec les PDF, d'autres formats arrivent bientôt.",
+    subtitle: 'PDF, images et documents Office — tous supportés dès maintenant.',
     soon: 'Bientôt',
     items: [
-      { label: 'Documents PDF', description: 'Métadonnées, auteur, XMP, liens' },
-      { label: 'Documents Word', description: 'Propriétés, commentaires, révisions' },
-      { label: 'Images', description: 'EXIF, GPS, appareil photo' },
-      { label: 'Tableurs Excel', description: 'Feuilles masquées, macros, auteur' },
+      { label: 'Documents PDF', description: 'Métadonnées, auteur, XMP, JS, fichiers embarqués' },
+      { label: 'Documents Word', description: 'Auteur, société, tracked changes, commentaires' },
+      { label: 'Images', description: 'EXIF, coordonnées GPS, modèle d\'appareil' },
+      { label: 'Excel & PowerPoint', description: 'Auteur, société, commentaires, liens' },
     ],
   },
   faq: {

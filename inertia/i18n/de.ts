@@ -88,7 +88,7 @@ const de: Translations = {
     tag: 'Ausprobieren',
     title: 'Überzeug dich selbst.',
     subtitle: 'Lade eine Datei hoch und entdecke sofort die Informationen, die sie preisgibt.',
-    tabs: { pdf: 'PDF', image: 'Bild' },
+    tabs: { pdf: 'PDF', image: 'Bild', office: 'Office' },
     upload: {
       title: 'Datei hier ablegen',
       subtitle: 'oder klicken zum Auswählen',
@@ -99,6 +99,12 @@ const de: Translations = {
       title: 'Bild hier ablegen',
       subtitle: 'oder klicken zum Auswählen',
       formats: 'JPEG, PNG, WebP, GIF, ICO · max 20 MB',
+      dragging: 'Loslassen zum Analysieren',
+    },
+    officeUpload: {
+      title: 'Office-Datei hier ablegen',
+      subtitle: 'oder klicken zum Auswählen',
+      formats: 'DOCX, XLSX, PPTX · max 20 MB',
       dragging: 'Loslassen zum Analysieren',
     },
     result: {
@@ -118,13 +124,13 @@ const de: Translations = {
   formats: {
     tag: 'Kompatibilität',
     title: 'Unterstützte Formate',
-    subtitle: 'Starte mit PDFs — weitere Formate folgen bald.',
+    subtitle: 'PDF, Bilder und Office-Dokumente — alle ab sofort unterstützt.',
     soon: 'Bald',
     items: [
-      { label: 'PDF-Dokumente', description: 'Metadaten, Autor, XMP, Links' },
-      { label: 'Word-Dokumente', description: 'Eigenschaften, Kommentare, Revisionen' },
-      { label: 'Bilder', description: 'EXIF, GPS, Kamerainfo' },
-      { label: 'Excel-Tabellen', description: 'Versteckte Blätter, Makros, Autor' },
+      { label: 'PDF-Dokumente', description: 'Metadaten, Autor, XMP, JS, eingebettete Dateien' },
+      { label: 'Word-Dokumente', description: 'Autor, Firma, Änderungsverfolgung, Kommentare' },
+      { label: 'Bilder', description: 'EXIF, GPS-Koordinaten, Kameramodell' },
+      { label: 'Excel & PowerPoint', description: 'Autor, Firma, Kommentare, Hyperlinks' },
     ],
   },
   faq: {
