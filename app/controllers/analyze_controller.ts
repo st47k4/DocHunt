@@ -8,6 +8,7 @@ const MAX_SIZE_BYTES = 20 * 1024 * 1024 // 20 Mo
 const MAX_FILENAME_LENGTH = 255
 
 const PDF_MAGIC = Buffer.from('%PDF')
+const OFFICE_MAGIC = Buffer.from([0x50, 0x4b, 0x03, 0x04]) // PK\x03\x04 — ZIP local file header
 
 // Magic bytes image
 const JPEG_MAGIC = Buffer.from([0xff, 0xd8, 0xff])
@@ -20,6 +21,8 @@ const ICO_MAGIC = Buffer.from([0x00, 0x00, 0x01, 0x00])
 const SAFE_PDF_RE = /^[a-zA-Z0-9 ._\-()[\]{}àâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+\.pdf$/i
 const SAFE_IMAGE_RE =
   /^[a-zA-Z0-9 ._\-()[\]{}àâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+\.(jpg|jpeg|png|webp|gif|ico)$/i
+const SAFE_OFFICE_RE =
+  /^[a-zA-Z0-9 ._\-()[\]{}àâäéèêëîïôöùûüçÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ]+\.(docx|xlsx|pptx)$/i
 
 function sanitizeFilename(raw: string | undefined, fallback: string): string {
   if (!raw) return fallback
@@ -175,6 +178,50 @@ export default class AnalyzeController {
       { request, response } as HttpContext,
       '/analyze/image',
       'image/jpeg',
+      data,
+      safeFilename
+    )
+  }
+
+  // ── Office ────────────────────────────────────────────────────────────────
+
+  async handleOffice({ request, response }: HttpContext) {
+    const ALLOWED_EXTS = ['docx', 'xlsx', 'pptx']
+    const file = request.file('file', { size: '20mb', extnames: ALLOWED_EXTS })
+
+    if (!file) return response.badRequest({ error: 'Aucun fichier fourni.' })
+    if (file.hasErrors)
+      return response.badRequest({ error: file.errors[0]?.message ?? 'Fichier invalide.' })
+
+    const safeFilename = sanitizeFilename(file.clientName, 'document.docx')
+    if (!SAFE_OFFICE_RE.test(safeFilename)) {
+      return response.badRequest({ error: 'Nom de fichier non autorisé.' })
+    }
+
+    if (!file.tmpPath) return response.badRequest({ error: 'Fichier temporaire introuvable.' })
+
+    let data: Buffer
+    try {
+      data = await readFile(file.tmpPath)
+    } catch {
+      return response.internalServerError({ error: 'Impossible de lire le fichier uploadé.' })
+    } finally {
+      unlink(file.tmpPath).catch(() => {})
+    }
+
+    if (data.length > MAX_SIZE_BYTES) {
+      return response.requestEntityTooLarge({ error: 'Fichier trop volumineux (max 20 Mo).' })
+    }
+    if (data.length < 4 || !data.subarray(0, 4).equals(OFFICE_MAGIC)) {
+      return response.unprocessableEntity({
+        error: "Le fichier n'est pas un document Office valide.",
+      })
+    }
+
+    return proxyToPython(
+      { request, response } as HttpContext,
+      '/analyze/office',
+      'application/octet-stream',
       data,
       safeFilename
     )

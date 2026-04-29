@@ -31,6 +31,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/analyze_controller').default['handleImage']>>>
     }
   }
+  'analyze.office': {
+    methods: ["POST"]
+    pattern: '/api/analyze/office'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/analyze_controller').default['handleOffice']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/analyze_controller').default['handleOffice']>>>
+    }
+  }
   'stats': {
     methods: ["GET","HEAD"]
     pattern: '/api/stats'

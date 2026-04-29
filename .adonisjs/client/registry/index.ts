@@ -18,6 +18,12 @@ const routes = {
     tokens: [{"old":"/api/analyze/image","type":0,"val":"api","end":""},{"old":"/api/analyze/image","type":0,"val":"analyze","end":""},{"old":"/api/analyze/image","type":0,"val":"image","end":""}],
     types: placeholder as Registry['analyze.image']['types'],
   },
+  'analyze.office': {
+    methods: ["POST"],
+    pattern: '/api/analyze/office',
+    tokens: [{"old":"/api/analyze/office","type":0,"val":"api","end":""},{"old":"/api/analyze/office","type":0,"val":"analyze","end":""},{"old":"/api/analyze/office","type":0,"val":"office","end":""}],
+    types: placeholder as Registry['analyze.office']['types'],
+  },
   'stats': {
     methods: ["GET","HEAD"],
     pattern: '/api/stats',

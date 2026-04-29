@@ -5,6 +5,7 @@ export interface ApiDefinition {
   analyze: {
     pdf: typeof routes['analyze.pdf']
     image: typeof routes['analyze.image']
+    office: typeof routes['analyze.office']
   }
   stats: typeof routes['stats']
   home: typeof routes['home'] & {
